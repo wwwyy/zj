@@ -2,10 +2,10 @@
   <div id="attendance">
     <Form :model="formItem" :label-width="80" inline style="text-align:left;">
         <FormItem label="工号">
-            <Input v-model="formItem.input" placeholder="请输入工号"></Input>
+            <Input v-model="formItem.input" placeholder="请输入工号" style="width:170px"></Input>
         </FormItem>
         <FormItem label="姓名">
-            <Input v-model="formItem.input" placeholder="请输入姓名"></Input>
+            <Input v-model="formItem.input" placeholder="请输入姓名" style="width:170px"></Input>
         </FormItem>
         <FormItem label="打卡时间">
             <Row>
@@ -18,7 +18,7 @@
                 </Col>
             </Row>
         </FormItem>
-     
+     <br>
         <FormItem label="部门">
             <Select v-model="formItem.select1" style="width:170px">
                 <Option value="beijing">New York</Option>

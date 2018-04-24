@@ -1,5 +1,5 @@
 <template>
-  <div id="classAttendance">
+  <div id="classAttendance" class="clearfix">
        <Form :model="formItem" :label-width="80" inline style="text-align:left;">
           <FormItem label="部门">
             <Select v-model="formItem.select" style="width:170px">
@@ -19,7 +19,159 @@
             <Button type="ghost" style="margin-left: 8px">清　　空</Button>
         </FormItem>
     </Form>
-    <Table border :columns="columns1" :data="data1"></Table>
+    <!-- <Table border :columns="columns1" :data="data1"></Table> -->
+    <ButtonGroup>
+        <Button type="primary">
+            第一周
+        </Button>
+        <Button type="primary">
+            <Icon type="chevron-left"></Icon>
+            上一周
+        </Button>
+        <Button type="primary">
+            下一周
+            <Icon type="chevron-right"></Icon>
+        </Button>
+        <Button type="primary">
+            最末周
+        </Button>
+    </ButtonGroup>
+    <table class="flat-table">
+  <tbody>
+    <tr>
+      <th>工号</th>
+      <th>姓名</th>
+      <th> </th>
+      <th>2018/03/01 <br>星期一</th>
+      <th>2018/03/02 <br>星期二</th>
+      <th>2018/03/03 <br>星期三</th>
+      <th>2018/03/04 <br>星期四</th>
+      <th>2018/03/05 <br>星期五</th>
+      <th>2018/03/06 <br>星期六</th>
+      <th>2018/03/07 <br>星期日</th>
+    </tr>
+    <tr>
+      <td>01311</td>
+      <td>赵彦明</td>
+      <td class="scheduling_info">
+          <p class="scheduling">排班考勤</p>
+          <p class="leave">加班/请假</p>
+      </td>
+      <td class="scheduling_info">
+          <p class="class_info">
+              <span style="line-height:30px;">
+                  0830 - 请假
+              </span> <br>
+                 <Select v-model="classType" size="small" style="width:100px">
+                    <Option v-for="item in classList" :value="item.value" :key="item.value">{{ item.label }}</Option>
+                </Select>
+          </p>
+          
+          <p class="leave">
+              <span>
+                  请假
+              </span>
+          </p>
+      </td>
+      <td class="scheduling_info">
+          <p class="class_info">
+              <span style="line-height:30px;">
+                  0830 - 请假
+              </span> <br>
+                 <Select v-model="classType" size="small" style="width:100px">
+                    <Option v-for="item in classList" :value="item.value" :key="item.value">{{ item.label }}</Option>
+                </Select>
+          </p>
+          
+          <p class="leave">
+              <span>
+                  请假
+              </span>
+          </p>
+      </td>
+      <td class="scheduling_info">
+          <p class="class_info">
+              <span style="line-height:30px;">
+                  0830 - 请假
+              </span> <br>
+                 <Select v-model="classType" size="small" style="width:100px">
+                    <Option v-for="item in classList" :value="item.value" :key="item.value">{{ item.label }}</Option>
+                </Select>
+          </p>
+          
+          <p class="leave">
+              <span>
+                  请假
+              </span>
+          </p>
+      </td>
+      <td class="scheduling_info">
+          <p class="class_info">
+              <span style="line-height:30px;">
+                  0830 - 请假
+              </span> <br>
+                 <Select v-model="classType" size="small" style="width:100px">
+                    <Option v-for="item in classList" :value="item.value" :key="item.value">{{ item.label }}</Option>
+                </Select>
+          </p>
+          
+          <p class="leave">
+              <span>
+                  请假
+              </span>
+          </p>
+      </td>
+      <td class="scheduling_info">
+          <p class="class_info">
+              <span style="line-height:30px;">
+                  0830 - 请假
+              </span> <br>
+                 <Select v-model="classType" size="small" style="width:100px">
+                    <Option v-for="item in classList" :value="item.value" :key="item.value">{{ item.label }}</Option>
+                </Select>
+          </p>
+          
+          <p class="leave">
+              <span>
+                  请假
+              </span>
+          </p>
+      </td>
+      <td class="scheduling_info">
+          <p class="class_info">
+              <span style="line-height:30px;">
+                  0830 - 请假
+              </span> <br>
+                 <Select v-model="classType" size="small" style="width:100px">
+                    <Option v-for="item in classList" :value="item.value" :key="item.value">{{ item.label }}</Option>
+                </Select>
+          </p>
+          
+          <p class="leave">
+              <span>
+                  请假
+              </span>
+          </p>
+      </td>
+      <td class="scheduling_info">
+          <p class="class_info">
+              <span style="line-height:30px;">
+                  0830 - 请假
+              </span> <br>
+                 <Select v-model="classType" size="small" style="width:100px">
+                    <Option v-for="item in classList" :value="item.value" :key="item.value">{{ item.label }}</Option>
+                </Select>
+          </p>
+          
+          <p class="leave">
+              <span>
+                  请假
+              </span>
+          </p>
+      </td>
+    </tr>
+  </tbody>
+	</table>
   </div>
 </template>
 
@@ -31,43 +183,47 @@ export default {
                 select: '',
                 date: '',/*  */
             },
-            columns1: [
-                   {
-                        title: '工号',
-                        key: 'id'
+             classList: [
+                    {
+                        value: '正常',
+                        label: '正常'
                     },
                     {
-                        title: '姓名',
-                        key: 'name'
+                        value: '加班',
+                        label: '加班'
                     },
                     {
-                        title: ' ',
-                        key: 'type'
+                        value: '请假',
+                        label: '请假'
                     },
                     {
-                        title: '2018/03/01 111 ',
-                        key: 'type'
+                        value: '迟到',
+                        label: '迟到'
                     },
                     {
-                        title: ' ',
-                        key: 'type'
+                        value: '早退',
+                        label: '早退'
                     },
                     {
-                        title: ' ',
-                        key: 'type'
+                        value: '旷工',
+                        label: '旷工'
                     },
                     {
-                        title: ' ',
-                        key: 'type'
+                        value: '异常',
+                        label: '异常'
                     },
-                    
+                    {
+                        value: '未知',
+                        label: '未知'
+                    }
                 ],
-                data1: [
+                classType: '正常',
+                classDatas: [
                     {
                         name: 'John Brown',
                         age: 18,
                         address: 'New York No. 1 Lake Park',
-                        date: '2016-10-03'
+                        date: '2016-10-03',
                     },
                     {
                         name: 'Jim Green',

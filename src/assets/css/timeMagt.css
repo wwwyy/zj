@@ -3,3 +3,39 @@
     margin: 0 auto;
     padding: 24px 0;
 }
+.flat-table {
+    display: block;
+    font-family: sans-serif;
+    -webkit-font-smoothing: antialiased;
+    font-size: 115%;
+    overflow: auto;
+    width: auto;
+  }
+  .flat-table th {
+    background-color: #5cadff;
+    color: white;
+    font-weight: normal;
+    padding: 20px 10px;
+    text-align: center;
+  }
+  .flat-table td {
+    background-color: #eeeeee;
+    color: #6f6f6f;
+    padding: 0px 15px;
+  }
+  .scheduling,.leave {
+      padding: 0 15px;
+      line-height: 60px;
+      height: 60px;
+  }
+  .scheduling {
+      border-bottom: 1px solid #999;
+  }
+  .flat-table .scheduling_info {
+      padding: 0px 0;
+  }
+  .class_info {
+    height: 60px;
+    padding: 0px 10px;
+    border-bottom: 1px solid #999;
+  }
