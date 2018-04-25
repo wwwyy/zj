@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import timeMagt from '@/components/timeMagt'
 import remunerationMagt from '@/components/remunerationMagt'
 import attendance from '@/views/timeMagt/attendance'
+import applyForLeave from '@/views/timeMagt/applyForLeave'
 import classAttendance from '@/views/timeMagt/classAttendance'
 import salaryGeneration from '@/views/remunerationMagt/salaryGeneration'
 
@@ -32,6 +33,11 @@ export default new Router({
           path:'classAttendance',
           name: 'classAttendance',
           component: classAttendance
+        },
+        {
+          path:'applyForLeave',
+          name: 'applyForLeave',
+          component: applyForLeave
         }
       ]
     },

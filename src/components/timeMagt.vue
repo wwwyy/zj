@@ -17,7 +17,7 @@
                                 <Icon type="ios-keypad"></Icon>
                                 请假管理
                             </template>
-                            <MenuItem name="2-1">请假申请</MenuItem>
+                            <MenuItem name="applyForLeave">请假申请</MenuItem>
                             <MenuItem name="2-2">请假申请管理</MenuItem>
                         </Submenu>
                         <Submenu name="3">
