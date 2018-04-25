@@ -7,34 +7,18 @@
                         <Submenu name="1">
                             <template slot="title">
                                 <Icon type="ios-navigate"></Icon>
-                               考勤管理
+                               月度薪资管理
                             </template>
-                            <MenuItem name="attendance">考勤查询</MenuItem>
-                            <MenuItem name="classAttendance">排班考勤</MenuItem>
+                            <MenuItem name="attendance">薪资生成</MenuItem>
+                            <MenuItem name="classAttendance">生成薪资调整</MenuItem>
                         </Submenu>
                         <Submenu name="2">
                             <template slot="title">
                                 <Icon type="ios-keypad"></Icon>
-                                请假管理
+                                月度绩效管理
                             </template>
-                            <MenuItem name="2-1">请假申请</MenuItem>
-                            <MenuItem name="2-2">请假申请管理</MenuItem>
-                        </Submenu>
-                        <Submenu name="3">
-                            <template slot="title">
-                                <Icon type="ios-analytics"></Icon>
-                                加班管理
-                            </template>
-                            <MenuItem name="3-1">加班申请</MenuItem>
-                            <MenuItem name="3-2">加班申请管理</MenuItem>
-                        </Submenu>
-                        <Submenu name="4">
-                            <template slot="title">
-                                <Icon type="ios-analytics"></Icon>
-                               排班管理
-                            </template>
-                            <MenuItem name="4-1">排班定义</MenuItem>
-                            <MenuItem name="4-2">排班配置</MenuItem>
+                            <MenuItem name="2-1">绩效完成情况</MenuItem>
+                            <MenuItem name="2-2">每日之星</MenuItem>
                         </Submenu>
                     </Menu>
                 </Sider>
