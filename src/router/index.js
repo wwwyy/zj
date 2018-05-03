@@ -5,6 +5,10 @@ import remunerationMagt from '@/components/remunerationMagt'
 import attendance from '@/views/timeMagt/attendance'
 import applyForLeave from '@/views/timeMagt/applyForLeave'
 import classAttendance from '@/views/timeMagt/classAttendance'
+import applyLeaveDetail from '@/views/timeMagt/applyLeaveDetail'
+import applyLeaveForm from '@/views/timeMagt/applyLeaveForm'
+import leaveManagement from '@/views/timeMagt/leaveManagement'
+import overtimeApl from '@/views/timeMagt/overtimeApl'
 import salaryGeneration from '@/views/remunerationMagt/salaryGeneration'
 
 Vue.use(Router)
@@ -38,6 +42,26 @@ export default new Router({
           path:'applyForLeave',
           name: 'applyForLeave',
           component: applyForLeave
+        },
+        {
+          path: 'applyLeaveDetail',
+          name: 'applyLeaveDetail',
+          component: applyLeaveDetail
+        },
+        {
+          path: 'applyLeaveForm',
+          name: 'applyLeaveForm',
+          component: applyLeaveForm
+        },
+        {
+          path: 'leaveManagement',
+          name: 'leaveManagement',
+          component: leaveManagement
+        },
+        {
+          path: 'overtimeApl',
+          name: 'overtimeApl',
+          component: overtimeApl
         }
       ]
     },

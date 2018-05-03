@@ -18,14 +18,14 @@
                                 请假管理
                             </template>
                             <MenuItem name="applyForLeave">请假申请</MenuItem>
-                            <MenuItem name="2-2">请假申请管理</MenuItem>
+                            <MenuItem name="leaveManagement">请假申请管理</MenuItem>
                         </Submenu>
                         <Submenu name="3">
                             <template slot="title">
                                 <Icon type="ios-analytics"></Icon>
                                 加班管理
                             </template>
-                            <MenuItem name="3-1">加班申请</MenuItem>
+                            <MenuItem name="overtimeApl">加班申请</MenuItem>
                             <MenuItem name="3-2">加班申请管理</MenuItem>
                         </Submenu>
                         <Submenu name="4">

@@ -39,3 +39,31 @@
     padding: 0px 10px;
     border-bottom: 1px solid #999;
   }
+  .formTitle {
+      height: 40px;
+      line-height: 40px;
+      border-bottom: 1px solid #ccc;
+  }
+  .formTitle_l {
+      float: left;
+      line-height: 40px;
+      font-size: 18px;
+  }
+  .formTitle_r {
+      float: right;
+      line-height: 40px;
+  }
+  .formLists {
+      margin-top: 40px;
+      border: 1px solid #ccc;
+      line-height: 40px;
+  }
+  .infoName {
+      background: #eee;
+  }
+  .steps {
+      text-align: left;
+      width: 70%;
+      margin: 0 auto;
+      margin-top: 30px;
+  }

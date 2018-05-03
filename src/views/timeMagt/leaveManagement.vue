@@ -1,15 +1,21 @@
 <template>
-  <div id="applyForLeave">
+  <div id="leaveManagement">
     <Form :model="formItem" :label-width="80" inline style="text-align:left;">
         <FormItem label="请假事由">
-            <Select v-model="formItem.select1" style="width:155px">
+            <Input v-model="formItem.input" placeholder="请输入工号" style="width:100px;"></Input>
+        </FormItem>
+        <FormItem label="请假事由">
+            <Input v-model="formItem.input" placeholder="请输入姓名" style="width:100px"></Input>
+        </FormItem>
+        <FormItem label="请假事由">
+            <Select v-model="formItem.select1" style="width:100px">
                 <Option value="beijing">New York</Option>
                 <Option value="shanghai">London</Option>
                 <Option value="shenzhen">Sydney</Option>
             </Select>
         </FormItem>
        <FormItem label="提交时间">
-            <Row>
+            <Row style="width:240px;">
                 <Col span="11">
                     <DatePicker type="date" placeholder="请选择日期" v-model="formItem.submitDate1"></DatePicker>
                 </Col>
@@ -20,15 +26,29 @@
             </Row>
         </FormItem>
         <br>
+        <FormItem label="请假事由">
+            <Select v-model="formItem.select1" style="width:100px">
+                <Option value="beijing">New York</Option>
+                <Option value="shanghai">London</Option>
+                <Option value="shenzhen">Sydney</Option>
+            </Select>
+        </FormItem>
+        <FormItem label="请假事由">
+            <Select v-model="formItem.select1" style="width:100px">
+                <Option value="beijing">New York</Option>
+                <Option value="shanghai">London</Option>
+                <Option value="shenzhen">Sydney</Option>
+            </Select>
+        </FormItem>
         <FormItem label="申请状态" >
-            <Select v-model="formItem.select2" style="width:155px">
+            <Select v-model="formItem.select2" style="width:100px">
                 <Option value="beijing">New York</Option>
                 <Option value="shanghai">London</Option>
                 <Option value="shenzhen">Sydney</Option>
             </Select>
         </FormItem>
         <FormItem label="请假时间">
-            <Row>
+            <Row style="width:240px;">
                 <Col span="11">
                     <DatePicker type="date" placeholder="请选择日期" v-model="formItem.leaveDate1"></DatePicker>
                 </Col>
@@ -41,15 +61,15 @@
      
         
         
-          <FormItem>
+        <FormItem class="btns">
             <Button type="primary">查　　询</Button>
             <Button type="ghost" style="margin-left: 8px">清　　空</Button>
         </FormItem>
     </Form>
     <div style="text-align:left;padding:5px 0;border-top:1px solid #ccc">
-        <Button type="ghost" shape="circle" @click="toApplyForm">请假申请</Button>
+        <Button type="primary"><Icon type="ios-download-outline"></Icon> 导 出 </Button>
     </div>
-     <Table :columns="historyColumns" :data="historyData" style="width:100%;"></Table>
+     <Table :columns="historyColumns" :data="historyData" style="width:100%;" border ></Table>
       <Page :total="dataCount" :page-size="pageSize" show-total @on-change="changepage" style="paddingTop:24px;"></Page>
   </div>
 </template>
@@ -60,29 +80,44 @@ let testData = {
                     {
                         id: '01311',
                         name: '赵彦明',
+                        reasons: '年假',
+                        department: '销售部',
                         englishName: 'John Brown',
                         department: '销售部',
                         quarter: '销售主管',
                         level: 'JB6',
-                        punchTime: '2018-10-03 20:00:00'
+                        state: '审批通过',
+                        leaveTime: '2018-10-03 - 2018-10-08',
+                        duration: '5天',
+                        submitTime: '2018-10-03 20:00:00'
                     },
                     {
                         id: '01312',
                         name: '赵彦明',
+                        reasons: '年假',
+                        department: '销售部',
                         englishName: 'John Brown',
                         department: '销售部',
                         quarter: '销售主管',
                         level: 'JB6',
-                        punchTime: '2018-10-03 20:00:00'
+                        state: '审批通过',
+                        leaveTime: '2018-10-03 - 2018-10-08',
+                        duration: '5天',
+                        submitTime: '2018-10-03 20:00:00'
                     },
                     {
                         id: '01313',
                         name: '赵彦明',
+                        reasons: '年假',
+                        department: '销售部',
                         englishName: 'John Brown',
                         department: '销售部',
                         quarter: '销售主管',
                         level: 'JB6',
-                        punchTime: '2018-10-03 20:00:00'
+                        state: '审批通过',
+                        leaveTime: '2018-10-03 - 2018-10-08',
+                        duration: '5天',
+                        submitTime: '2018-10-03 20:00:00'
                     },
                     {
                         id: '01314',
@@ -298,24 +333,69 @@ export default {
                         key: 'name'
                     },
                     {
-                        title: '英文名',
-                        key: 'englishName'
+                        title: '请假事由',
+                        key: 'reasons'
                     },
                     {
                         title: '部门',
                         key: 'department'
                     },
                     {
-                        title: '岗位',
-                        key: 'quarter'
-                    },
-                    {
                         title: '职级',
                         key: 'level'
                     },
                     {
-                        title: '打卡时间',
-                        key: 'punchTime'
+                        title: '申请状态',
+                        key: 'state'
+                    },
+                    {
+                        title: '请假时段',
+                        key: 'leaveTime',
+                        width: 180,
+                    },
+                    {
+                        title: '时长',
+                        key: 'duration',
+                    },
+                    {
+                        title: '提交时间',
+                        key: 'submitTime',
+                        width: 150,
+                    },
+                    {
+                        title: 'Action',
+                        key: 'action',
+                        width: 150,
+                        align: 'center',
+                        render: (h, params) => {
+                            return h('div', [
+                                h('Button', {
+                                    props: {
+                                        type: 'primary',
+                                        size: 'small'
+                                    },
+                                    style: {
+                                        marginRight: '5px'
+                                    },
+                                    on: {
+                                        click: () => {
+                                            this.show(params.index)
+                                        }
+                                    }
+                                }, '查看'),
+                                h('Button', {
+                                    props: {
+                                        type: 'error',
+                                        size: 'small'
+                                    },
+                                    on: {
+                                        click: () => {
+                                            this.show(params.index)
+                                        }
+                                    }
+                                }, '撤销')
+                            ]);
+                        }
                     }
                 ],
             }
@@ -343,6 +423,14 @@ export default {
             },
             toApplyForm(){
                  this.$router.push('/timeMagt/applyLeaveForm')
+            },
+            show (index) {
+               console.log(index)
+               this.$router.push('/timeMagt/applyLeaveDetail')
+            },
+            //删除当前行
+            remove (index) {
+                this.data6.splice(index, 1);
             }
         },
         created(){
@@ -354,5 +442,8 @@ export default {
 <style>
     .ivu-table-overflowX {
         overflow-x: hidden;
+    }
+    .btns .ivu-form-item-content {
+        margin-left: 0!important;
     }
 </style>
