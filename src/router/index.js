@@ -8,12 +8,15 @@ import classAttendance from '@/views/timeMagt/classAttendance'
 import applyLeaveDetail from '@/views/timeMagt/applyLeaveDetail'
 import applyLeaveForm from '@/views/timeMagt/applyLeaveForm'
 import leaveManagement from '@/views/timeMagt/leaveManagement'
+import overtimeManagement from '@/views/timeMagt/overtimeManagement'
 import overtimeApl from '@/views/timeMagt/overtimeApl'
+import overtimeAplForm from '@/views/timeMagt/overtimeAplForm'
+import overtimeDetail from '@/views/timeMagt/overtimeDetail'
 import salaryGeneration from '@/views/remunerationMagt/salaryGeneration'
 
 Vue.use(Router)
 
-export default new Router({
+const router = new Router({
   mode: 'history',
   linkActiveClass: 'is-active',
   routes: [
@@ -62,7 +65,25 @@ export default new Router({
           path: 'overtimeApl',
           name: 'overtimeApl',
           component: overtimeApl
-        }
+        },
+        {
+          path: 'overtimeAplForm',
+          name: 'overtimeAplForm',
+          component: overtimeAplForm
+        },
+        {
+          path: 'overtimeManagement',
+          name: 'overtimeManagement',
+          component: overtimeManagement
+        },
+        {
+          path: 'overtimeDetail',
+          name: 'overtimeDetail',
+          component: overtimeDetail,
+          meta: {
+            title: '加班申请查看'
+          }
+        },
       ]
     },
     {
@@ -83,5 +104,12 @@ export default new Router({
         // }
       ]
     }
-  ]
+  ],
 })
+router.beforeEach((to, from, next) => {
+  if (to.meta.title) {//如果设置标题，拦截后设置标题
+    document.title = to.meta.title
+  }
+  next()
+})
+export default router

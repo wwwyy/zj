@@ -3,7 +3,7 @@
   <div class="hello">
     <Layout>
                 <Sider hide-trigger :style="{background: '#fff'}">
-                    <Menu active-name="attendance" theme="light" width="auto" :open-names="['1']" @on-select="test">
+                    <Menu active-name="attendance" theme="light" width="auto" :open-names="['1']" @on-select="go">
                         <Submenu name="1">
                             <template slot="title">
                                 <Icon type="ios-navigate"></Icon>
@@ -26,7 +26,7 @@
                                 加班管理
                             </template>
                             <MenuItem name="overtimeApl">加班申请</MenuItem>
-                            <MenuItem name="3-2">加班申请管理</MenuItem>
+                            <MenuItem name="overtimeManagement">加班申请管理</MenuItem>
                         </Submenu>
                         <Submenu name="4">
                             <template slot="title">
@@ -56,12 +56,12 @@ export default {
     }
   },
   methods: {
-      test(name){
+      go(name){
           this.$router.push('/timeMagt/'+name)
           console.log(name)
       }
       
-  }
+  },
 }
 </script>
 

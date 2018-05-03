@@ -3,7 +3,7 @@
     <div class="layout">
         <Layout>
             <Header>
-                <Menu mode="horizontal" theme="primary" active-name="1">
+                <Menu mode="horizontal" theme="primary" active-name="1" @on-select="go">
                     <div class="layout-logo">
                       海尔洲际
                     </div>
@@ -20,11 +20,11 @@
                             <Icon type="ios-analytics"></Icon>
                             人事管理
                         </MenuItem>
-                        <MenuItem name="4">
+                        <MenuItem name="timeMagt">
                             <Icon type="ios-paper"></Icon>
                             时间管理
                         </MenuItem>
-                         <MenuItem name="5">
+                         <MenuItem name="remunerationMagt">
                             <Icon type="ios-navigate"></Icon>
                           薪酬管理
                         </MenuItem>
@@ -51,7 +51,14 @@
 
 <script>
 export default {
-  name: 'App'
+  name: 'App',
+  methods: {
+      go(name){
+          this.$router.push('/'+name)
+          console.log(name)
+      }
+      
+  }
 }
 </script>
 

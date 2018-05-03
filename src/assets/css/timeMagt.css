@@ -67,3 +67,20 @@
       margin: 0 auto;
       margin-top: 30px;
   }
+  .overtimeEmp {
+      margin-top: 30px;
+      line-height: 40px;
+      text-align: left;
+  }
+  .addEmp {
+    line-height: 40px;
+    border: 1px solid #ccc;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  .overtimeEmpInfo {
+      margin-top: 20px;
+      line-height: 40px;
+      border: 1px solid #ccc;
+      text-align: center;
+  }
