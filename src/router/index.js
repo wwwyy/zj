@@ -12,7 +12,10 @@ import overtimeManagement from '@/views/timeMagt/overtimeManagement'
 import overtimeApl from '@/views/timeMagt/overtimeApl'
 import overtimeAplForm from '@/views/timeMagt/overtimeAplForm'
 import overtimeDetail from '@/views/timeMagt/overtimeDetail'
+import classDefine from '@/views/timeMagt/classDefine'
+import classConfig from '@/views/timeMagt/classConfig'
 import salaryGeneration from '@/views/remunerationMagt/salaryGeneration'
+import salaryAdjust from '@/views/remunerationMagt/salaryAdjust'
 
 Vue.use(Router)
 
@@ -84,6 +87,22 @@ const router = new Router({
             title: '加班申请查看'
           }
         },
+        {
+          path: 'classDefine',
+          name: 'classDefine',
+          component: classDefine,
+          meta: {
+            title: '排班定义'
+          }
+        },
+        {
+          path: 'classConfig',
+          name: 'classConfig',
+          component: classConfig,
+          meta: {
+            title: '排班定义'
+          }
+        }
       ]
     },
     {
@@ -97,11 +116,11 @@ const router = new Router({
           name: 'salaryGeneration',
           component: salaryGeneration
         },
-        // {
-        //   path:'classAttendance',
-        //   name: 'classAttendance',
-        //   component: classAttendance
-        // }
+        {
+          path:'salaryAdjust',
+          name: 'salaryAdjust',
+          component: salaryAdjust
+        }
       ]
     }
   ],

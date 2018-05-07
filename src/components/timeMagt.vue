@@ -33,8 +33,8 @@
                                 <Icon type="ios-analytics"></Icon>
                                排班管理
                             </template>
-                            <MenuItem name="4-1">排班定义</MenuItem>
-                            <MenuItem name="4-2">排班配置</MenuItem>
+                            <MenuItem name="classDefine">排班定义</MenuItem>
+                            <MenuItem name="classConfig">排班配置</MenuItem>
                         </Submenu>
                     </Menu>
                 </Sider>

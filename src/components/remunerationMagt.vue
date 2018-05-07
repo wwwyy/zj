@@ -9,8 +9,8 @@
                                 <Icon type="ios-navigate"></Icon>
                                月度薪资管理
                             </template>
-                            <MenuItem name="attendance">薪资生成</MenuItem>
-                            <MenuItem name="classAttendance">生成薪资调整</MenuItem>
+                            <MenuItem name="salaryGeneration">薪资生成</MenuItem>
+                            <MenuItem name="salaryAdjust">生成薪资调整</MenuItem>
                         </Submenu>
                         <Submenu name="2">
                             <template slot="title">
@@ -41,7 +41,7 @@ export default {
   },
   methods: {
       test(name){
-          this.$router.push('/timeMagt/'+name)
+          this.$router.push('/remunerationMagt/'+name)
           console.log(name)
       }
       

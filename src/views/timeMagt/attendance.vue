@@ -335,7 +335,7 @@ export default {
 </script>
 
 <style>
-    .ivu-table-overflowX {
+    #attendance .ivu-table-overflowX {
         overflow-x: hidden;
     }
 </style>

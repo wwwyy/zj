@@ -1,5 +1,5 @@
 <template>
-  <div id="classAttendance" class="clearfix">
+  <div id="classConfig" class="clearfix">
        <Form :model="formItem" :label-width="80" inline style="text-align:left;">
           <FormItem label="部门">
             <Select v-model="formItem.select" style="width:170px">
@@ -20,25 +20,44 @@
         </FormItem>
     </Form>
     <!-- <Table border :columns="columns1" :data="data1"></Table> -->
-       
-    <div style="text-align:right;margin-right:30px;">
-        <ButtonGroup>
-        <Button type="primary">
-            第一周
-        </Button>
-        <Button type="primary">
-            <Icon type="chevron-left"></Icon>
-            上一周
-        </Button>
-        <Button type="primary">
-            下一周
-            <Icon type="chevron-right"></Icon>
-        </Button>
-        <Button type="primary">
-            最末周
-        </Button>
-    </ButtonGroup>
-    </div>
+
+    <Row>
+        <Col span="7">
+              <span>部门工作日默认排班: </span>
+              <Select v-model="timeinterval1" style="width:160px">
+                    <Option v-for="item in timeinterval" :value="item.value" :key="item.value">{{ item.label }}</Option>
+                </Select>
+        </Col>
+        <Col span="7">
+             <span>部门休息日默认排班: </span>
+              <Select v-model="timeinterval2" style="width:160px">
+                    <Option v-for="item in timeinterval" :value="item.value" :key="item.value">{{ item.label }}</Option>
+                </Select>
+        </Col>
+        <Col span="3">
+            <Button type="default">
+                保存部门默认排班
+            </Button>
+        </Col>
+        <Col span="7">
+             <ButtonGroup>
+                <Button type="primary">
+                    第一周
+                </Button>
+                <Button type="primary">
+                    <Icon type="chevron-left"></Icon>
+                    上一周
+                </Button>
+                <Button type="primary">
+                    下一周
+                    <Icon type="chevron-right"></Icon>
+                </Button>
+                <Button type="primary">
+                    最末周
+                </Button>
+            </ButtonGroup>
+        </Col>
+    </Row>
     <table class="flat-table">
   <tbody>
     <tr>
@@ -182,6 +201,14 @@
 export default {
   data() {
       return {
+          timeinterval1: '',
+          timeinterval2: '',
+          timeinterval: [
+              {
+                  value: '0830（08:30 ~ 17:00）',
+                  label: '0830（08:30 ~ 17:00）'
+              }
+          ],
           formItem: {
                 select: '',
                 date: '',/*  */
