@@ -1,53 +1,80 @@
 <template>
-  <div id="mealStatistics">
-    <Form :model="formItem" :label-width="80" inline style="text-align:left;">
+  <div id="trainingStatistics">
+    <Form :model="formItem" :label-width="84" inline style="text-align:left;">
         <FormItem label="工号">
-            <Input v-model="formItem.input" placeholder="请输入工号" style="width:170px"></Input>
+            <Input v-model="formItem.input" placeholder="请输入工号" style="width:100px"></Input>
         </FormItem>
         <FormItem label="姓名">
-            <Input v-model="formItem.input" placeholder="请输入姓名" style="width:170px"></Input>
+            <Input v-model="formItem.input" placeholder="请输入姓名" style="width:100px"></Input>
         </FormItem>
-        <FormItem label="开始日期">
-             <DatePicker type="date" placeholder="请选择日期" v-model="formItem.date"></DatePicker>
+        <FormItem label="入职时间" style="width:330px">
+             <Row>
+                <Col span="11">
+                    <DatePicker type="date" placeholder="请选择日期" v-model="formItem.date"></DatePicker>
+                </Col>
+                <Col span="2" style="text-align: center">-</Col>
+                <Col span="11">
+                    <TimePicker type="time" placeholder="请选择时间" v-model="formItem.time"></TimePicker>
+                </Col>
+            </Row>
+        </FormItem>
+        <FormItem label="学历">
+            <Select v-model="formItem.select1" style="width:100px">
+                <Option value="beijing">New York</Option>
+                <Option value="shanghai">London</Option>
+                <Option value="shenzhen">Sydney</Option>
+            </Select>
+        </FormItem>
+        <FormItem label="入职时间" style="width:150px">
+             <Row>
+                <Col span="11">
+                    <Input v-model="formItem.input" placeholder=""></Input>
+                </Col>
+                <Col span="2" style="text-align: center">-</Col>
+                <Col span="11">
+                    <Input v-model="formItem.input" placeholder=""></Input>
+                </Col>
+            </Row>
         </FormItem>
      <br>
         <FormItem label="部门">
-            <Select v-model="formItem.select1" style="width:170px">
+            <Select v-model="formItem.select1" style="width:100px">
                 <Option value="beijing">New York</Option>
                 <Option value="shanghai">London</Option>
                 <Option value="shenzhen">Sydney</Option>
             </Select>
         </FormItem>
         <FormItem label="职级" >
-            <Select v-model="formItem.select2" style="width:170px">
+            <Select v-model="formItem.select2" style="width:100px">
                 <Option value="beijing">New York</Option>
                 <Option value="shanghai">London</Option>
                 <Option value="shenzhen">Sydney</Option>
             </Select>
         </FormItem>
-          <FormItem>
-            <Button type="primary">查　　询</Button>
-            <Button type="ghost" style="margin-left: 8px">清　　空</Button>
+        <FormItem label="合同到期时间" style="width:330px">
+             <Row>
+                <Col span="11">
+                    <DatePicker type="date" placeholder="请选择日期" v-model="formItem.date"></DatePicker>
+                </Col>
+                <Col span="2" style="text-align: center">-</Col>
+                <Col span="11">
+                    <TimePicker type="time" placeholder="请选择时间" v-model="formItem.time"></TimePicker>
+                </Col>
+            </Row>
+        </FormItem>
+        <FormItem label="员工状态">
+            <Select v-model="formItem.select1" style="width:100px">
+                <Option value="beijing">New York</Option>
+                <Option value="shanghai">London</Option>
+                <Option value="shenzhen">Sydney</Option>
+            </Select>
+        </FormItem>
+          <FormItem style="width:140px;margin-left:10px" class="btns">
+            <Button type="primary" size="small">查　　询</Button>
+            <Button type="ghost" size="small" style="margin-left: 8px">清　　空</Button>
         </FormItem>
     </Form>
-     <div style="text-align:left;margin-left:30px;margin-bottom:10px;">
-        <ButtonGroup>
-        <Button type="primary">
-            第一周
-        </Button>
-        <Button type="primary">
-            <Icon type="chevron-left"></Icon>
-            上一周
-        </Button>
-        <Button type="primary">
-            下一周
-            <Icon type="chevron-right"></Icon>
-        </Button>
-        <Button type="primary">
-            最末周
-        </Button>
-    </ButtonGroup>
-    </div>
+    
      <Table :columns="historyColumns" :data="historyData" style="width:100%;" border></Table>
       <Page :total="dataCount" :page-size="pageSize" show-total @on-change="changepage" style="paddingTop:24px;"></Page>
   </div>
@@ -62,8 +89,12 @@ let testData = {
                         englishName: 'John Brown',
                         department: '销售部',
                         quarter: '销售主管',
-                        level: '￥58/3次',
-                        punchTime: '2018-10-03 20:00:00'
+                        level: 'JB6',
+                        punchTime: '2018-10-03 20:00:00',
+                        state: '正式员工',
+                        education: '本科',
+                        age: '26',
+                        phone: '18661751111'
                     },
                     {
                         id: '01312',
@@ -294,57 +325,65 @@ export default {
                         key: 'name'
                     },
                     {
+                        title: '英文名',
+                        key: 'englishName',
+                        width: 120
+                    },
+                    {
                         title: '部门',
                         key: 'department',
-                        width: 90
                     },
                     {
                         title: '岗位',
                         key: 'quarter',
-                        width: 90
                     },
                     {
-                        title: '2018/03/01       星期四',
+                        title: '职级',
                         key: 'level',
-                        width: 110,
-                        align: 'center'
+                        width: 80
                     },
                     {
-                        title: '2018/03/02       星期五',
-                        key: 'level',
-                        width: 110,
-                        align: 'center'
+                        title: '员工状态',
+                        key: 'state'
                     },
                     {
-                        title: '2018/03/03       星期六',
-                        key: 'level',
-                        width: 110,
-                        align: 'center'
+                        title: '学历',
+                        key: 'education'
                     },
                     {
-                        title: '2018/03/04       星期日',
-                        key: 'level',
-                        width: 110,
-                        align: 'center'
+                        title: '年龄',
+                        key: 'age',
+                        width: 80
                     },
                     {
-                        title: '2018/03/05       星期一',
-                        key: 'level',
-                        width: 110,
-                        align: 'center'
+                        title: '电话',
+                        key: 'phone',
+                        width: 120
                     },
                     {
-                        title: '2018/03/06      星期二',
-                        key: 'level',
-                        width: 110,
-                        align: 'center'
-                    },
-                    {
-                        title: '2018/03/07       星期三',
-                        key: 'level',
-                        width: 110,
-                        align: 'center'
-                    },
+                        title: 'Action',
+                        key: 'action',
+                        width: 150,
+                        align: 'center',
+                        render: (h, params) => {
+                            return h('div', [
+                                h('Button', {
+                                    props: {
+                                        type: 'primary',
+                                        size: 'small'
+                                    },
+                                    style: {
+                                        marginRight: '5px'
+                                    },
+                                    on: {
+                                        click: () => {
+                                            this.toTrainingRecords()
+                                        }
+                                    }
+                                }, '培训记录'),
+                            ]);
+                        }
+                    }
                 ],
             }
         },
@@ -368,6 +407,9 @@ export default {
                 var _start = ( index - 1 ) * this.pageSize;
                 var _end = index * this.pageSize;
                 this.historyData = this.ajaxHistoryData.slice(_start,_end);
+            },
+            toTrainingRecords() {
+                this.$router.push('/trainingMagt/trainingRecords')
             }
         },
         created(){
@@ -379,5 +421,8 @@ export default {
 <style>
     #attendance .ivu-table-overflowX {
         overflow-x: hidden;
+    }
+    #trainingStatistics .btns .ivu-form-item-content {
+        margin-left: 0 !important;
     }
 </style>

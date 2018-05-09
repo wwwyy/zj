@@ -1,53 +1,37 @@
 <template>
-  <div id="mealStatistics">
+  <div id="applied">
     <Form :model="formItem" :label-width="80" inline style="text-align:left;">
-        <FormItem label="工号">
-            <Input v-model="formItem.input" placeholder="请输入工号" style="width:170px"></Input>
-        </FormItem>
-        <FormItem label="姓名">
-            <Input v-model="formItem.input" placeholder="请输入姓名" style="width:170px"></Input>
-        </FormItem>
-        <FormItem label="开始日期">
-             <DatePicker type="date" placeholder="请选择日期" v-model="formItem.date"></DatePicker>
-        </FormItem>
-     <br>
-        <FormItem label="部门">
+        <FormItem label="业务类型">
             <Select v-model="formItem.select1" style="width:170px">
                 <Option value="beijing">New York</Option>
                 <Option value="shanghai">London</Option>
                 <Option value="shenzhen">Sydney</Option>
             </Select>
         </FormItem>
-        <FormItem label="职级" >
+        <FormItem label="申请状态" >
             <Select v-model="formItem.select2" style="width:170px">
                 <Option value="beijing">New York</Option>
                 <Option value="shanghai">London</Option>
                 <Option value="shenzhen">Sydney</Option>
             </Select>
         </FormItem>
-          <FormItem>
+        <FormItem label="入职时间" style="width:330px">
+             <Row>
+                <Col span="11">
+                    <DatePicker type="date" placeholder="请选择日期" v-model="formItem.date"></DatePicker>
+                </Col>
+                <Col span="2" style="text-align: center">-</Col>
+                <Col span="11">
+                    <TimePicker type="time" placeholder="请选择时间" v-model="formItem.time"></TimePicker>
+                </Col>
+            </Row>
+        </FormItem>
+          <FormItem class="btns">
             <Button type="primary">查　　询</Button>
             <Button type="ghost" style="margin-left: 8px">清　　空</Button>
         </FormItem>
     </Form>
-     <div style="text-align:left;margin-left:30px;margin-bottom:10px;">
-        <ButtonGroup>
-        <Button type="primary">
-            第一周
-        </Button>
-        <Button type="primary">
-            <Icon type="chevron-left"></Icon>
-            上一周
-        </Button>
-        <Button type="primary">
-            下一周
-            <Icon type="chevron-right"></Icon>
-        </Button>
-        <Button type="primary">
-            最末周
-        </Button>
-    </ButtonGroup>
-    </div>
+    
      <Table :columns="historyColumns" :data="historyData" style="width:100%;" border></Table>
       <Page :total="dataCount" :page-size="pageSize" show-total @on-change="changepage" style="paddingTop:24px;"></Page>
   </div>
@@ -57,13 +41,15 @@
 let testData = {
     'histories' : [
                     {
+                        businessTypes: '请假申请',
                         id: '01311',
                         name: '赵彦明',
                         englishName: 'John Brown',
                         department: '销售部',
                         quarter: '销售主管',
                         level: '￥58/3次',
-                        punchTime: '2018-10-03 20:00:00'
+                        punchTime: '2018-10-03 20:00:00',
+                        state: '审批中'
                     },
                     {
                         id: '01312',
@@ -286,65 +272,70 @@ export default {
                 },
                 historyColumns: [
                     {
-                        title: '工号',
-                        key: 'id'
+                        title: '业务类型',
+                        key: 'businessTypes',
+                        align: 'center',
                     },
                     {
-                        title: '姓名',
-                        key: 'name'
+                        title: '申请人工号',
+                        key: 'id',
+                        align: 'center',
                     },
                     {
-                        title: '部门',
+                        title: '申请人',
+                        key: 'name',
+                        align: 'center',
+                    },
+                    {
+                        title: '申请人部门',
                         key: 'department',
-                        width: 90
+                        align: 'center',
                     },
                     {
-                        title: '岗位',
-                        key: 'quarter',
-                        width: 90
+                        title: '状态',
+                        key: 'state',
+                        align: 'center',
                     },
                     {
-                        title: '2018/03/01       星期四',
-                        key: 'level',
-                        width: 110,
-                        align: 'center'
+                        title: '提交时间',
+                        key: 'punchTime',
+                        align: 'center',
                     },
                     {
-                        title: '2018/03/02       星期五',
-                        key: 'level',
-                        width: 110,
-                        align: 'center'
-                    },
-                    {
-                        title: '2018/03/03       星期六',
-                        key: 'level',
-                        width: 110,
-                        align: 'center'
-                    },
-                    {
-                        title: '2018/03/04       星期日',
-                        key: 'level',
-                        width: 110,
-                        align: 'center'
-                    },
-                    {
-                        title: '2018/03/05       星期一',
-                        key: 'level',
-                        width: 110,
-                        align: 'center'
-                    },
-                    {
-                        title: '2018/03/06      星期二',
-                        key: 'level',
-                        width: 110,
-                        align: 'center'
-                    },
-                    {
-                        title: '2018/03/07       星期三',
-                        key: 'level',
-                        width: 110,
-                        align: 'center'
-                    },
+                        title: '操作',
+                        key: 'action',
+                        width: 150,
+                        align: 'center',
+                        render: (h, params) => {
+                            return h('div', [
+                                h('Button', {
+                                    props: {
+                                        type: 'primary',
+                                        size: 'small'
+                                    },
+                                    style: {
+                                        marginRight: '5px'
+                                    },
+                                    on: {
+                                        click: () => {
+                                            this.show(params.index)
+                                        }
+                                    }
+                                }, '查看'),
+                                h('Button', {
+                                    props: {
+                                        type: 'error',
+                                        size: 'small'
+                                    },
+                                    on: {
+                                        click: () => {
+                                            this.show(params.index)
+                                        }
+                                    }
+                                }, '撤销')
+                            ]);
+                        }
+                    }
                 ],
             }
         },
@@ -368,7 +359,11 @@ export default {
                 var _start = ( index - 1 ) * this.pageSize;
                 var _end = index * this.pageSize;
                 this.historyData = this.ajaxHistoryData.slice(_start,_end);
-            }
+            },
+            show (index) {
+               console.log(index)
+               this.$router.push('/myWork/appliedLeaveDetail')
+            },
         },
         created(){
              this.handleListApproveHistory();
@@ -379,5 +374,8 @@ export default {
 <style>
     #attendance .ivu-table-overflowX {
         overflow-x: hidden;
+    }
+    #applied .btns .ivu-form-item-content {
+        margin-left: 20px !important;
     }
 </style>

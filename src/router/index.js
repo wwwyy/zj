@@ -17,9 +17,20 @@ import classConfig from '@/views/timeMagt/classConfig'
 import salaryGeneration from '@/views/remunerationMagt/salaryGeneration'
 import salaryAdjust from '@/views/remunerationMagt/salaryAdjust'
 
-//cateringMagt
+//cateringMagt 餐饮统计
 import cateringMagt from '@/components/cateringMagt'
 import mealStatistics from '@/views/cateringMagt/mealStatistics'
+
+//trainingMagt 员工培训
+import trainingMagt from '@/components/trainingMagt'
+import trainingStatistics from '@/views/trainingMagt/trainingStatistics'
+import trainingRecords from '@/views/trainingMagt/trainingRecords'
+
+// myWork  我的工作
+import myWork from '@/components/myWork'
+import applied from '@/views/myWork/applied'
+import appliedLeaveDetail from '@/views/myWork/appliedLeaveDetail'
+
 
 
 Vue.use(Router)
@@ -30,8 +41,26 @@ const router = new Router({
   routes: [
     {
       path: '/',
-      component: timeMagt,
-      redirect: '/timeMagt/attendance',
+      component: myWork,
+      redirect: '/myWork/applied',
+    },
+    {
+      path: '/myWork',
+      name: 'myWork',
+      component: myWork,
+      redirect: '/myWork/applied',
+      children: [
+        {
+          path:'applied',
+          name: 'applied',
+          component: applied
+        },
+        {
+          path:'appliedLeaveDetail',
+          name: 'appliedLeaveDetail',
+          component: appliedLeaveDetail
+        }
+      ]
     },
     {
       path: '/timeMagt',
@@ -140,6 +169,30 @@ const router = new Router({
           component: mealStatistics,
           meta: {
             title: '用餐统计'
+          }
+        }
+      ]
+    },
+    {
+      path: '/trainingMagt',
+      name: 'trainingMagt',
+      component: trainingMagt,
+      redirect: '/trainingMagt/trainingStatistics',
+      children: [
+        {
+          path:'trainingStatistics',
+          name: 'trainingStatistics',
+          component: trainingStatistics,
+          meta: {
+            title: '员工培训'
+          }
+        },
+        {
+          path:'trainingRecords',
+          name: 'trainingRecords',
+          component: trainingRecords,
+          meta: {
+            title: '查看员工培训记录'
           }
         }
       ]

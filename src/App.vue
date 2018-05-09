@@ -8,7 +8,7 @@
                       海尔洲际
                     </div>
                     <div class="layout-nav">
-                        <MenuItem name="1">
+                        <MenuItem name="myWork">
                             <Icon type="ios-navigate"></Icon>
                           我的工作
                         </MenuItem>
@@ -32,13 +32,9 @@
                             <Icon type="ios-keypad"></Icon>
                             餐饮管理
                         </MenuItem>
-                        <MenuItem name="7">
+                        <MenuItem name="trainingMagt">
                             <Icon type="ios-analytics"></Icon>
                             培训管理
-                        </MenuItem>
-                        <MenuItem name="8">
-                            <Icon type="ios-paper"></Icon>
-                           系统管理
                         </MenuItem>
                     </div>
                 </Menu>
