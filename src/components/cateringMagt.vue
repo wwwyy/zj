@@ -1,24 +1,14 @@
 <template>
-
-  <div class="hello">
+  <div class="cateringMagt">
     <Layout>
                 <Sider hide-trigger :style="{background: '#fff'}">
-                    <Menu active-name="salaryGeneration" theme="light" width="auto" :open-names="['1']" @on-select="test">
+                    <Menu active-name="mealStatistics" theme="light" width="auto" :open-names="['1']" @on-select="test">
                         <Submenu name="1">
                             <template slot="title">
                                 <Icon type="ios-navigate"></Icon>
-                               月度薪资管理
+                               餐饮管理
                             </template>
-                            <MenuItem name="salaryGeneration">薪资生成</MenuItem>
-                            <MenuItem name="salaryAdjust">生成薪资调整</MenuItem>
-                        </Submenu>
-                        <Submenu name="2">
-                            <template slot="title">
-                                <Icon type="ios-keypad"></Icon>
-                                月度绩效管理
-                            </template>
-                            <MenuItem name="2-1">绩效完成情况</MenuItem>
-                            <MenuItem name="2-2">每日之星</MenuItem>
+                            <MenuItem name="mealStatistics">用餐统计</MenuItem>
                         </Submenu>
                     </Menu>
                 </Sider>
@@ -41,7 +31,7 @@ export default {
   },
   methods: {
       test(name){
-          this.$router.push('/remunerationMagt/'+name)
+          this.$router.push('/cateringMagt/'+name)
           console.log(name)
       }
       

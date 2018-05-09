@@ -17,6 +17,11 @@ import classConfig from '@/views/timeMagt/classConfig'
 import salaryGeneration from '@/views/remunerationMagt/salaryGeneration'
 import salaryAdjust from '@/views/remunerationMagt/salaryAdjust'
 
+//cateringMagt
+import cateringMagt from '@/components/cateringMagt'
+import mealStatistics from '@/views/cateringMagt/mealStatistics'
+
+
 Vue.use(Router)
 
 const router = new Router({
@@ -120,6 +125,22 @@ const router = new Router({
           path:'salaryAdjust',
           name: 'salaryAdjust',
           component: salaryAdjust
+        }
+      ]
+    },
+    {
+      path: '/cateringMagt',
+      name: 'cateringMagt',
+      component: cateringMagt,
+      redirect: '/cateringMagt/mealStatistics',
+      children: [
+        {
+          path:'mealStatistics',
+          name: 'mealStatistics',
+          component: mealStatistics,
+          meta: {
+            title: '用餐统计'
+          }
         }
       ]
     }

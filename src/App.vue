@@ -28,7 +28,7 @@
                             <Icon type="ios-navigate"></Icon>
                           薪酬管理
                         </MenuItem>
-                        <MenuItem name="6">
+                        <MenuItem name="cateringMagt">
                             <Icon type="ios-keypad"></Icon>
                             餐饮管理
                         </MenuItem>
