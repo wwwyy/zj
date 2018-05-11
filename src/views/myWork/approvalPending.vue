@@ -1,7 +1,33 @@
 <template>
-  <div id="applied">
+  <div id="approvalPending">
     <Form :model="formItem" :label-width="80" inline style="text-align:left;">
+        <FormItem label="申请人工号">
+            <Input v-model="formItem.input" placeholder="请输入工号" style="width:170px;"></Input>
+        </FormItem>
+        <FormItem label="申请人姓名">
+            <Input v-model="formItem.input" placeholder="请输入姓名" style="width:170px"></Input>
+        </FormItem>
+        
+        <FormItem label="提交时间">
+             <Row>
+                <Col span="11">
+                    <DatePicker type="date" placeholder="请选择日期" v-model="formItem.date"></DatePicker>
+                </Col>
+                <Col span="2" style="text-align: center">-</Col>
+                <Col span="11">
+                    <TimePicker type="time" placeholder="请选择时间" v-model="formItem.time"></TimePicker>
+                </Col>
+            </Row>
+        </FormItem>
+        <br>
         <FormItem label="业务类型">
+            <Select v-model="formItem.select1" style="width:170px">
+                <Option value="beijing">New York</Option>
+                <Option value="shanghai">London</Option>
+                <Option value="shenzhen">Sydney</Option>
+            </Select>
+        </FormItem>
+        <FormItem label="申请人部门">
             <Select v-model="formItem.select1" style="width:170px">
                 <Option value="beijing">New York</Option>
                 <Option value="shanghai">London</Option>
@@ -15,17 +41,6 @@
                 <Option value="shenzhen">Sydney</Option>
             </Select>
         </FormItem>
-        <FormItem label="入职时间" style="width:330px">
-             <Row>
-                <Col span="11">
-                    <DatePicker type="date" placeholder="请选择日期" v-model="formItem.date"></DatePicker>
-                </Col>
-                <Col span="2" style="text-align: center">-</Col>
-                <Col span="11">
-                    <TimePicker type="time" placeholder="请选择时间" v-model="formItem.time"></TimePicker>
-                </Col>
-            </Row>
-        </FormItem>
           <FormItem class="btns">
             <Button type="primary">查　　询</Button>
             <Button type="ghost" style="margin-left: 8px">清　　空</Button>
@@ -34,12 +49,10 @@
     
      <Table :columns="historyColumns" :data="historyData" style="width:100%;" border></Table>
       <Page :total="dataCount" :page-size="pageSize" show-total @on-change="changepage" style="paddingTop:24px;"></Page>
-      
   </div>
 </template>
 
 <script>
-
 let testData = {
     'histories' : [
                     {
@@ -320,21 +333,10 @@ export default {
                                     },
                                     on: {
                                         click: () => {
-                                            this.show(params.index)
+                                            this.toApproval(params.index)
                                         }
                                     }
-                                }, '查看'),
-                                h('Button', {
-                                    props: {
-                                        type: 'error',
-                                        size: 'small'
-                                    },
-                                    on: {
-                                        click: () => {
-                                            this.show(params.index)
-                                        }
-                                    }
-                                }, '撤销')
+                                }, '审批')
                             ]);
                         }
                     }
@@ -362,12 +364,11 @@ export default {
                 var _end = index * this.pageSize;
                 this.historyData = this.ajaxHistoryData.slice(_start,_end);
             },
-            show (index) {
+            toApproval (index) {
                console.log(index)
-               this.$router.push('/myWork/appliedLeaveDetail')
+               this.$router.push('/myWork/approvalDetails')
             },
         },
-        
         created(){
              this.handleListApproveHistory();
         }

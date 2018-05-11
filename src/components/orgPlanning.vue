@@ -1,18 +1,29 @@
 <template>
 
-  <div id="myWork">
+  <div class="hello">
     <Layout>
                 <Sider hide-trigger :style="{background: '#fff'}">
-                    <Menu active-name="applied" theme="light" width="auto" :open-names="['1']" @on-select="go">
+                    <Menu active-name="depPlanning" theme="light" width="auto" :open-names="['1']" @on-select="go">
                         <Submenu name="1">
                             <template slot="title">
                                 <Icon type="ios-navigate"></Icon>
-                               我的工作
+                               部门管理
                             </template>
-                            <MenuItem name="applied">已申请</MenuItem>
-                            <MenuItem name="approvalPending">待审批</MenuItem>
-                            <MenuItem name="approved">已审批</MenuItem>
-                            <MenuItem name="myScheduling">我的班次</MenuItem>
+                            <MenuItem name="depPlanning">部门规划</MenuItem>
+                        </Submenu>
+                        <Submenu name="2">
+                            <template slot="title">
+                                <Icon type="ios-keypad"></Icon>
+                                岗位管理
+                            </template>
+                            <MenuItem name="postPlanning">岗位规划</MenuItem>
+                        </Submenu>
+                        <Submenu name="3">
+                            <template slot="title">
+                                <Icon type="ios-analytics"></Icon>
+                                组织结构
+                            </template>
+                            <MenuItem name="organizationChart">组织结构图</MenuItem>
                         </Submenu>
                     </Menu>
                 </Sider>
@@ -27,7 +38,7 @@
 
 <script>
 export default {
-  name: 'myWork',
+  name: 'timeMagt',
   data () {
     return {
       
@@ -35,7 +46,7 @@ export default {
   },
   methods: {
       go(name){
-          this.$router.push('/myWork/'+name)
+          this.$router.push('/orgPlanning/'+name)
           console.log(name)
       }
       

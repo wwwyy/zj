@@ -12,7 +12,7 @@
                             <Icon type="ios-navigate"></Icon>
                           我的工作
                         </MenuItem>
-                        <MenuItem name="2">
+                        <MenuItem name="orgPlanning">
                             <Icon type="ios-keypad"></Icon>
                             组织规划
                         </MenuItem>

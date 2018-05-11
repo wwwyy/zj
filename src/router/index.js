@@ -30,8 +30,24 @@ import trainingRecords from '@/views/trainingMagt/trainingRecords'
 import myWork from '@/components/myWork'
 import applied from '@/views/myWork/applied'
 import appliedLeaveDetail from '@/views/myWork/appliedLeaveDetail'
+import approvalPending from '@/views/myWork/approvalPending'
+import approvalDetails from '@/views/myWork/approvalDetails'
+import approved from '@/views/myWork/approved'
+import myScheduling from '@/views/myWork/myScheduling'
 
+// orgPlanning 组织规划
+import orgPlanning from '@/components/orgPlanning'
+import depPlanning from '@/views/orgPlanning/depPlanning'
+import postPlanning from '@/views/orgPlanning/postPlanning'
+import organizationChart from '@/views/orgPlanning/organizationChart'
 
+// 排班日历插件
+import fullCalendar from 'vue-fullcalendar'
+
+// login 登陆页面
+import login from '@/components/login'
+
+Vue.component('full-calendar', fullCalendar)
 
 Vue.use(Router)
 
@@ -43,6 +59,11 @@ const router = new Router({
       path: '/',
       component: myWork,
       redirect: '/myWork/applied',
+    },
+    {
+      path: '/login',
+      name: 'login',
+      component: login
     },
     {
       path: '/myWork',
@@ -59,6 +80,49 @@ const router = new Router({
           path:'appliedLeaveDetail',
           name: 'appliedLeaveDetail',
           component: appliedLeaveDetail
+        },
+        {
+          path:'approvalPending',
+          name: 'approvalPending',
+          component: approvalPending
+        },
+        {
+          path:'approvalDetails',
+          name: 'approvalDetails',
+          component: approvalDetails
+        },
+        {
+          path:'approved',
+          name: 'approved',
+          component: approved
+        },
+        {
+          path:'myScheduling',
+          name: 'myScheduling',
+          component: myScheduling
+        }
+      ]
+    },
+    {
+      path: '/orgPlanning',
+      name: 'orgPlanning',
+      component: orgPlanning,
+      redirect: '/orgPlanning/depPlanning',
+      children: [
+        {
+          path:'depPlanning',
+          name: 'depPlanning',
+          component: depPlanning
+        },
+        {
+          path:'postPlanning',
+          name: 'postPlanning',
+          component: postPlanning
+        },
+        {
+          path:'organizationChart',
+          name: 'organizationChart',
+          component: organizationChart
         }
       ]
     },
