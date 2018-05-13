@@ -1,5 +1,11 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+import Cookies from 'js-cookie';
+import iView from 'iview';
+
+//main.vue
+import mainNav from '@/components/mainNav'
+
 import timeMagt from '@/components/timeMagt'
 import remunerationMagt from '@/components/remunerationMagt'
 import attendance from '@/views/timeMagt/attendance'
@@ -45,7 +51,15 @@ import organizationChart from '@/views/orgPlanning/organizationChart'
 import fullCalendar from 'vue-fullcalendar'
 
 // login 登陆页面
-import login from '@/components/login'
+import loginRouter from '@/components/login.vue'
+// export const loginRouter = {
+//   path: '/login',
+//   name: 'login',
+//   meta: {
+//       title: 'Login - 登录'
+//   },
+//   component: () => import('@/components/login.vue')
+// };
 
 Vue.component('full-calendar', fullCalendar)
 
@@ -56,217 +70,244 @@ const router = new Router({
   linkActiveClass: 'is-active',
   routes: [
     {
-      path: '/',
-      component: myWork,
-      redirect: '/myWork/applied',
-    },
-    {
       path: '/login',
       name: 'login',
-      component: login
+      component: loginRouter,
     },
+    { path: "*", redirect: '/' },
     {
-      path: '/myWork',
-      name: 'myWork',
-      component: myWork,
+      path: '/',
+      name: 'mainNav',
+      component: mainNav,
       redirect: '/myWork/applied',
       children: [
         {
-          path:'applied',
-          name: 'applied',
-          component: applied
+          path: '/myWork',
+          name: 'myWork',
+          component: myWork,
+          redirect: '/myWork/applied',
+          children: [
+            {
+              path:'applied',
+              name: 'applied',
+              component: applied
+            },
+            {
+              path:'appliedLeaveDetail',
+              name: 'appliedLeaveDetail',
+              component: appliedLeaveDetail
+            },
+            {
+              path:'approvalPending',
+              name: 'approvalPending',
+              component: approvalPending
+            },
+            {
+              path:'approvalDetails',
+              name: 'approvalDetails',
+              component: approvalDetails
+            },
+            {
+              path:'approved',
+              name: 'approved',
+              component: approved
+            },
+            {
+              path:'myScheduling',
+              name: 'myScheduling',
+              component: myScheduling
+            }
+          ]
         },
         {
-          path:'appliedLeaveDetail',
-          name: 'appliedLeaveDetail',
-          component: appliedLeaveDetail
+          path: '/orgPlanning',
+          name: 'orgPlanning',
+          component: orgPlanning,
+          redirect: '/orgPlanning/depPlanning',
+          children: [
+            {
+              path:'depPlanning',
+              name: 'depPlanning',
+              component: depPlanning
+            },
+            {
+              path:'postPlanning',
+              name: 'postPlanning',
+              component: postPlanning
+            },
+            {
+              path:'organizationChart',
+              name: 'organizationChart',
+              component: organizationChart
+            }
+          ]
         },
         {
-          path:'approvalPending',
-          name: 'approvalPending',
-          component: approvalPending
+          path: '/timeMagt',
+          name: 'timeMagt',
+          component: timeMagt,
+          redirect: '/timeMagt/attendance',
+          children: [
+            {
+              path:'attendance',
+              name: 'attendance',
+              component: attendance
+            },
+            {
+              path:'classAttendance',
+              name: 'classAttendance',
+              component: classAttendance
+            },
+            {
+              path:'applyForLeave',
+              name: 'applyForLeave',
+              component: applyForLeave
+            },
+            {
+              path: 'applyLeaveDetail',
+              name: 'applyLeaveDetail',
+              component: applyLeaveDetail
+            },
+            {
+              path: 'applyLeaveForm',
+              name: 'applyLeaveForm',
+              component: applyLeaveForm
+            },
+            {
+              path: 'leaveManagement',
+              name: 'leaveManagement',
+              component: leaveManagement
+            },
+            {
+              path: 'overtimeApl',
+              name: 'overtimeApl',
+              component: overtimeApl
+            },
+            {
+              path: 'overtimeAplForm',
+              name: 'overtimeAplForm',
+              component: overtimeAplForm
+            },
+            {
+              path: 'overtimeManagement',
+              name: 'overtimeManagement',
+              component: overtimeManagement
+            },
+            {
+              path: 'overtimeDetail',
+              name: 'overtimeDetail',
+              component: overtimeDetail,
+              meta: {
+                title: '加班申请查看'
+              }
+            },
+            {
+              path: 'classDefine',
+              name: 'classDefine',
+              component: classDefine,
+              meta: {
+                title: '排班定义'
+              }
+            },
+            {
+              path: 'classConfig',
+              name: 'classConfig',
+              component: classConfig,
+              meta: {
+                title: '排班定义'
+              }
+            }
+          ]
         },
         {
-          path:'approvalDetails',
-          name: 'approvalDetails',
-          component: approvalDetails
+          path: '/remunerationMagt',
+          name: 'remunerationMagt',
+          component: remunerationMagt,
+          redirect: '/remunerationMagt/salaryGeneration',
+          children: [
+            {
+              path:'salaryGeneration',
+              name: 'salaryGeneration',
+              component: salaryGeneration
+            },
+            {
+              path:'salaryAdjust',
+              name: 'salaryAdjust',
+              component: salaryAdjust
+            }
+          ]
         },
         {
-          path:'approved',
-          name: 'approved',
-          component: approved
+          path: '/cateringMagt',
+          name: 'cateringMagt',
+          component: cateringMagt,
+          redirect: '/cateringMagt/mealStatistics',
+          children: [
+            {
+              path:'mealStatistics',
+              name: 'mealStatistics',
+              component: mealStatistics,
+              meta: {
+                title: '用餐统计'
+              }
+            }
+          ]
         },
         {
-          path:'myScheduling',
-          name: 'myScheduling',
-          component: myScheduling
+          path: '/trainingMagt',
+          name: 'trainingMagt',
+          component: trainingMagt,
+          redirect: '/trainingMagt/trainingStatistics',
+          children: [
+            {
+              path:'trainingStatistics',
+              name: 'trainingStatistics',
+              component: trainingStatistics,
+              meta: {
+                title: '员工培训'
+              }
+            },
+            {
+              path:'trainingRecords',
+              name: 'trainingRecords',
+              component: trainingRecords,
+              meta: {
+                title: '查看员工培训记录'
+              }
+            }
+          ]
         }
       ]
     },
-    {
-      path: '/orgPlanning',
-      name: 'orgPlanning',
-      component: orgPlanning,
-      redirect: '/orgPlanning/depPlanning',
-      children: [
-        {
-          path:'depPlanning',
-          name: 'depPlanning',
-          component: depPlanning
-        },
-        {
-          path:'postPlanning',
-          name: 'postPlanning',
-          component: postPlanning
-        },
-        {
-          path:'organizationChart',
-          name: 'organizationChart',
-          component: organizationChart
-        }
-      ]
-    },
-    {
-      path: '/timeMagt',
-      name: 'timeMagt',
-      component: timeMagt,
-      redirect: '/timeMagt/attendance',
-      children: [
-        {
-          path:'attendance',
-          name: 'attendance',
-          component: attendance
-        },
-        {
-          path:'classAttendance',
-          name: 'classAttendance',
-          component: classAttendance
-        },
-        {
-          path:'applyForLeave',
-          name: 'applyForLeave',
-          component: applyForLeave
-        },
-        {
-          path: 'applyLeaveDetail',
-          name: 'applyLeaveDetail',
-          component: applyLeaveDetail
-        },
-        {
-          path: 'applyLeaveForm',
-          name: 'applyLeaveForm',
-          component: applyLeaveForm
-        },
-        {
-          path: 'leaveManagement',
-          name: 'leaveManagement',
-          component: leaveManagement
-        },
-        {
-          path: 'overtimeApl',
-          name: 'overtimeApl',
-          component: overtimeApl
-        },
-        {
-          path: 'overtimeAplForm',
-          name: 'overtimeAplForm',
-          component: overtimeAplForm
-        },
-        {
-          path: 'overtimeManagement',
-          name: 'overtimeManagement',
-          component: overtimeManagement
-        },
-        {
-          path: 'overtimeDetail',
-          name: 'overtimeDetail',
-          component: overtimeDetail,
-          meta: {
-            title: '加班申请查看'
-          }
-        },
-        {
-          path: 'classDefine',
-          name: 'classDefine',
-          component: classDefine,
-          meta: {
-            title: '排班定义'
-          }
-        },
-        {
-          path: 'classConfig',
-          name: 'classConfig',
-          component: classConfig,
-          meta: {
-            title: '排班定义'
-          }
-        }
-      ]
-    },
-    {
-      path: '/remunerationMagt',
-      name: 'remunerationMagt',
-      component: remunerationMagt,
-      redirect: '/remunerationMagt/salaryGeneration',
-      children: [
-        {
-          path:'salaryGeneration',
-          name: 'salaryGeneration',
-          component: salaryGeneration
-        },
-        {
-          path:'salaryAdjust',
-          name: 'salaryAdjust',
-          component: salaryAdjust
-        }
-      ]
-    },
-    {
-      path: '/cateringMagt',
-      name: 'cateringMagt',
-      component: cateringMagt,
-      redirect: '/cateringMagt/mealStatistics',
-      children: [
-        {
-          path:'mealStatistics',
-          name: 'mealStatistics',
-          component: mealStatistics,
-          meta: {
-            title: '用餐统计'
-          }
-        }
-      ]
-    },
-    {
-      path: '/trainingMagt',
-      name: 'trainingMagt',
-      component: trainingMagt,
-      redirect: '/trainingMagt/trainingStatistics',
-      children: [
-        {
-          path:'trainingStatistics',
-          name: 'trainingStatistics',
-          component: trainingStatistics,
-          meta: {
-            title: '员工培训'
-          }
-        },
-        {
-          path:'trainingRecords',
-          name: 'trainingRecords',
-          component: trainingRecords,
-          meta: {
-            title: '查看员工培训记录'
-          }
-        }
-      ]
-    }
   ],
 })
 router.beforeEach((to, from, next) => {
+  iView.LoadingBar.start();
+
   if (to.meta.title) {//如果设置标题，拦截后设置标题
     document.title = to.meta.title
   }
   next()
-})
+ 
+      if (!Cookies.get('user') && to.name !== 'login') { // 判断是否已经登录且前往的页面不是登录页
+          next({
+              name: 'login'
+          });
+      } else if (Cookies.get('user') && to.name === 'login') { // 判断是否已经登录且前往的是登录页
+        if (to.meta.title) {//如果设置标题，拦截后设置标题
+          document.title = to.meta.title
+        }
+          next({
+              name: 'mainNav'
+          });
+      } 
+});
+router.afterEach((to) => {
+  
+  iView.LoadingBar.finish();
+  window.scrollTo(0, 0);
+});
 export default router
+// export const router = [
+//   loginRouter,
+// ];
