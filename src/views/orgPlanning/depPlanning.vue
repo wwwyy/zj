@@ -1,8 +1,8 @@
 <template>
   <div id="depPlanning">
       <Row type="flex" justify="space-around">
-        <Col span="11" class="contentBox" style="background: #f5f7f9;" >
-           <Tree :data="data3" :load-data="loadData" :render="renderContent" style="padding-top:60px;text-align:left;padding-left:60px"></Tree>
+        <Col span="11" class="contentBox"  style="background: #f5f7f9;" >
+           <Tree :data="data1" :load-data="loadData" @on-select-change="nodeInfo" style="padding-top:60px;text-align:left;padding-left:60px"></Tree>
         </Col>
         <Col span="11" class="contentBox" style="background: #f5f7f9;padding: 60px 20px 0;" >
             <div>
@@ -37,95 +37,14 @@
   </div>
 </template>
 <script>
+import axios from 'axios';
+import qs from 'qs';
 export default {
   data() {
     return {
-      data3: [
-        {
-          title: "parent 1",
-          expand: true,
-          render: (h, { root, node, data }) => {
-            return h(
-              "span",
-              {
-                style: {
-                  display: "inline-block",
-                  width: "100%"
-                }
-              },
-              [
-                h("span", [
-                  h("Icon", {
-                    props: {
-                      type: "ios-folder-outline"
-                    },
-                    style: {
-                      marginRight: "8px"
-                    }
-                  }),
-                  h("span", data.title)
-                ]),
-                h(
-                  "span",
-                  {
-                    style: {
-                      display: "inline-block",
-                      float: "right",
-                      marginRight: "32px"
-                    }
-                  },
-                  [
-                    h("Button", {
-                      props: Object.assign({}, this.buttonProps, {
-                        icon: "ios-plus-empty",
-                        type: "primary"
-                      }),
-                      style: {
-                        width: "52px"
-                      },
-                      on: {
-                        click: () => {
-                          this.append(data);
-                        }
-                      }
-                    })
-                  ]
-                )
-              ]
-            );
-          },
-          children: [
-            {
-              title: "child 1-1",
-              expand: true,
-              children: [
-                {
-                  title: "leaf 1-1-1",
-                  expand: true
-                },
-                {
-                  title: "leaf 1-1-2",
-                  expand: true
-                }
-              ]
-            },
-            {
-              title: "child 1-2",
-              expand: true,
-              children: [
-                {
-                  title: "leaf 1-2-1",
-                  expand: true
-                },
-                {
-                  title: "leaf 1-2-1",
-                  expand: true
-                }
-              ]
-            }
-          ]
-        }
-      ],
+      laodingData: [],
+       data1: [
+                ],
       buttonProps: {
         type: "ghost",
         size: "small"
@@ -175,23 +94,93 @@ export default {
       }
     };
   },
+  beforeCreate( ) {
+    const that = this;
+    axios.post('http://localhost/hotelhr/organize/department.json', qs.stringify({id:'0'}))
+            .then(function (response) {
+                let Result = response.data.result;
+                let treeData = [];
+                Result.forEach(function(item){
+                  if(item.subCount!==0){
+                    treeData.push(
+                      {
+                        id: item.id,
+                        title: item.name,
+                        information: item.information,
+                        isDivision: item.isDivision,
+                        parentId: item.parentId,
+                        expand: false,
+                        loading: false,
+                        children: []
+                      }
+                    )
+                  } else {
+                    treeData.push(
+                      {
+                        id: item.id,
+                        title: item.name,
+                        information: item.information,
+                        isDivision: item.isDivision,
+                        parentId: item.parentId,
+                      }
+                    )
+                  }
+                  
+                });
+                that.data1 = treeData;
+                console.log(treeData)
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+  },
   methods: {
-    loadData(item, callback) {
-      setTimeout(() => {
-        const data = [
-          {
-            title: "children",
-            loading: false,
-            children: []
-          },
-          {
-            title: "children",
-            loading: false,
-            children: []
-          }
-        ];
-        callback(data);
-      }, 1000);
+    nodeInfo(item) {
+      console.log(item)
+    },
+    loadData (item, callback) {
+        const that = this;
+        axios.post('http://localhost/hotelhr/organize/department.json', qs.stringify({id:item.id}))
+            .then(function (response) {
+                let Result = response.data.result;
+                let treeData = [];
+                Result.forEach(function(item){
+                  if(item.subCount!==0){
+                    treeData.push(
+                      {
+                        id: item.id,
+                        title: item.name,
+                        information: item.information,
+                        isDivision: item.isDivision,
+                        parentId: item.parentId,
+                        expand: false,
+                        loading: false,
+                        children: []
+                      }
+                    )
+                  } else {
+                    treeData.push(
+                      {
+                        id: item.id,
+                        title: item.name,
+                        information: item.information,
+                        isDivision: item.isDivision,
+                        parentId: item.parentId,
+                      }
+                    )
+                  }
+                  
+                });
+                that.laodingData = treeData;
+                console.log(treeData)
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+        setTimeout(() => {
+            const data = that.laodingData
+            callback(data);
+        }, 1000);
     },
     renderContent(h, { root, node, data }) {
       return h(

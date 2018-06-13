@@ -350,7 +350,7 @@ export default {
                                             this.show(params.index)
                                         }
                                     }
-                                }, '审批')
+                                }, '查看')
                             ]);
                         }
                     }

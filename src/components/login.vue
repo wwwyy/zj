@@ -30,7 +30,6 @@
                             <Button @click="handleSubmit" type="primary" long>登录</Button>
                         </FormItem>
                     </Form>
-                    <p class="login-tip">输入任意用户名和密码即可</p>
                 </div>
             </Card>
         </div>
@@ -39,11 +38,20 @@
 
 <script>
 import Cookies from 'js-cookie';
+import axios from 'axios';
+import qs from 'qs';
+axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded'
+// axios.interceptors.request.use((config) => {
+//   config.headers['X-Requested-With'] = 'XMLHttpRequest'
+
+//   return config
+// })
+
 export default {
     data () {
         return {
             form: {
-                userName: 'iview_admin',
+                userName: '',
                 password: ''
             },
             rules: {
@@ -58,21 +66,42 @@ export default {
     },
     methods: {
         handleSubmit () {
-            this.$refs.loginForm.validate((valid) => {
-                if (valid) {
-                    Cookies.set('user', this.form.userName);
-                    Cookies.set('password', this.form.password);
-                    // this.$store.commit('setAvator', 'https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=3448484253,3685836170&fm=27&gp=0.jpg');
-                    if (this.form.userName === 'iview_admin') {
-                        Cookies.set('access', 0);
-                    } else {
-                        Cookies.set('access', 1);
-                    }
-                    this.$router.push('/')
-                }
-            });
+            // Cookies.set('username', this.form.userName);
+            // Cookies.set('password', this.form.password);
+            // this.$router.push('/')
+            const that = this;
+            axios.post('http://localhost/hotelhr/login.json', qs.stringify({username:'admin',password:'admin'}))
+                    .then(function (response) {
+                        console.log(response.data.success);
+                        if(response.data.success) {
+                            console.log(that.form);
+                            Cookies.set('username', that.form.userName);
+                            Cookies.set('password', that.form.password);
+                            that.$router.push('/')
+                        }
+                    })
+                    .catch(function (error) {
+                        console.log(error);
+                    });
+
+
+            // this.$refs.loginForm.validate((valid) => {
+            //     if (valid) {
+            //         Cookies.set('user', this.form.userName);
+            //         Cookies.set('password', this.form.password);
+                    
+            //         // this.$store.commit('setAvator', 'https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=3448484253,3685836170&fm=27&gp=0.jpg');
+            //         if (this.form.userName === 'iview_admin') {
+            //             Cookies.set('access', 0);
+            //         } else {
+            //             Cookies.set('access', 1);
+            //         }
+                    
+            //         this.$router.push('/')
+            //     }
+            // });
         }
-    }
+    },
 };
 </script>
 

@@ -47,19 +47,20 @@ import depPlanning from '@/views/orgPlanning/depPlanning'
 import postPlanning from '@/views/orgPlanning/postPlanning'
 import organizationChart from '@/views/orgPlanning/organizationChart'
 
+// personMagt 人事管理 
+import personMagt from '@/components/personMagt'
+import empInfoMagt from '@/views/personMagt/empInfoMagt'
+import empInfoMod from '@/views/personMagt/empInfoMod'
+import empChanges from '@/views/personMagt/empChanges'
+import empChangesApply from '@/views/personMagt/empChangesApply'
+import empChangesDetails from '@/views/personMagt/empChangesDetails'
+
+
 // 排班日历插件
 import fullCalendar from 'vue-fullcalendar'
 
 // login 登陆页面
 import loginRouter from '@/components/login.vue'
-// export const loginRouter = {
-//   path: '/login',
-//   name: 'login',
-//   meta: {
-//       title: 'Login - 登录'
-//   },
-//   component: () => import('@/components/login.vue')
-// };
 
 Vue.component('full-calendar', fullCalendar)
 
@@ -139,6 +140,39 @@ const router = new Router({
               path:'organizationChart',
               name: 'organizationChart',
               component: organizationChart
+            }
+          ]
+        },
+        {
+          path: '/personMagt',
+          name: 'personMagt',
+          component: personMagt,
+          redirect: '/personMagt/empInfoMagt',
+          children: [
+            {
+              path:'empInfoMagt',
+              name: 'empInfoMagt',
+              component: empInfoMagt
+            },
+            {
+              path:'empInfoMod',
+              name: 'empInfoMod',
+              component: empInfoMod
+            },
+            {
+              path:'empChanges',
+              name: 'empChanges',
+              component: empChanges
+            },
+            {
+              path:'empChangesApply',
+              name: 'empChangesApply',
+              component: empChangesApply
+            },
+            {
+              path:'empChangesDetails',
+              name: 'empChangesDetails',
+              component: empChangesDetails
             }
           ]
         },
@@ -289,11 +323,11 @@ router.beforeEach((to, from, next) => {
   }
   next()
  
-      if (!Cookies.get('user') && to.name !== 'login') { // 判断是否已经登录且前往的页面不是登录页
+      if (!Cookies.get('username') && to.name !== 'login') { // 判断是否已经登录且前往的页面不是登录页
           next({
               name: 'login'
           });
-      } else if (Cookies.get('user') && to.name === 'login') { // 判断是否已经登录且前往的是登录页
+      } else if (Cookies.get('username') && to.name === 'login') { // 判断是否已经登录且前往的是登录页
         if (to.meta.title) {//如果设置标题，拦截后设置标题
           document.title = to.meta.title
         }

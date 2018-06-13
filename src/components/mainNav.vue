@@ -17,7 +17,7 @@
                             <Icon type="ios-keypad"></Icon>
                             组织规划
                         </MenuItem>
-                        <MenuItem name="3">
+                        <MenuItem name="personMagt">
                             <Icon type="ios-analytics"></Icon>
                             人事管理
                         </MenuItem>
@@ -55,6 +55,7 @@
 </template>
 
 <script>
+
 export default {
     name: 'mainNav',
     methods: {
