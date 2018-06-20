@@ -70,7 +70,15 @@ export default {
             // Cookies.set('password', this.form.password);
             // this.$router.push('/')
             const that = this;
-            axios.post('http://localhost/hotelhr/login.json', qs.stringify({username:'admin',password:'admin'}))
+            // axios.post('/api/upload', qs.stringify())
+            //         .then(function (response) {
+            //             console.log(response.data);
+                       
+            //         })
+            //         .catch(function (error) {
+            //             console.log(error);
+            //         });
+            axios.post('/api/hotelhr/login.json', qs.stringify({username:'admin',password:'admin'}))
                     .then(function (response) {
                         console.log(response.data.success);
                         if(response.data.success) {
