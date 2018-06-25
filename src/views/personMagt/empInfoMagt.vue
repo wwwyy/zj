@@ -380,7 +380,7 @@ export default {
                                     },
                                     on: {
                                         click: () => {
-                                            this.show(params.index)
+                                            this.mod(params.index)
                                         }
                                     }
                                 }, '修改'),
@@ -424,6 +424,10 @@ export default {
             },
             empAdd(){
               this.$router.push('empInfoAdd')
+            },
+            mod(){
+                 this.$router.push('empInfoMod')
+                
             }
         },
         created(){
@@ -433,7 +437,7 @@ export default {
 </script>
 <style>
   #personMagt{
-    min-width: 1500px;
+    min-width: 1520px;
     overflow: hidden;
   }
   

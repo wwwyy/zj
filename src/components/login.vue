@@ -66,32 +66,26 @@ export default {
     },
     methods: {
         handleSubmit () {
-            // Cookies.set('username', this.form.userName);
-            // Cookies.set('password', this.form.password);
-            // this.$router.push('/')
-            const that = this;
-            // axios.post('/api/upload', qs.stringify())
+            Cookies.set('username', this.form.userName);
+            Cookies.set('password', this.form.password);
+            this.$router.push('/')
+            
+            // const that = this;
+  
+            // axios.post('/api/hotelhr/login.json', qs.stringify({username:'admin',password:'admin'}))
             //         .then(function (response) {
-            //             console.log(response.data);
-                       
+            //             console.log(response.data.success);
+            //             if(response.data.success) {
+            //                 console.log(that.form);
+            //                 Cookies.set('username', that.form.userName);
+            //                 Cookies.set('password', that.form.password);
+            //                 Cookies.set('JSESSIONID', '9E59AEEA94D6C6869B765DECD28E4186');
+            //                 that.$router.push('/')
+            //             }
             //         })
             //         .catch(function (error) {
             //             console.log(error);
             //         });
-            axios.post('/api/hotelhr/login.json', qs.stringify({username:'admin',password:'admin'}))
-                    .then(function (response) {
-                        console.log(response.data.success);
-                        if(response.data.success) {
-                            console.log(that.form);
-                            Cookies.set('username', that.form.userName);
-                            Cookies.set('password', that.form.password);
-                            Cookies.set('JSESSIONID', '9E59AEEA94D6C6869B765DECD28E4186');
-                            that.$router.push('/')
-                        }
-                    })
-                    .catch(function (error) {
-                        console.log(error);
-                    });
 
 
             // this.$refs.loginForm.validate((valid) => {
