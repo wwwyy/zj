@@ -50,6 +50,7 @@ import organizationChart from '@/views/orgPlanning/organizationChart'
 // personMagt 人事管理 
 import personMagt from '@/components/personMagt'
 import empInfoMagt from '@/views/personMagt/empInfoMagt'
+import empInfoAdd from '@/views/personMagt/empInfoAdd'
 import empInfoMod from '@/views/personMagt/empInfoMod'
 import empChanges from '@/views/personMagt/empChanges'
 import empChangesApply from '@/views/personMagt/empChangesApply'
@@ -153,6 +154,11 @@ const router = new Router({
               path:'empInfoMagt',
               name: 'empInfoMagt',
               component: empInfoMagt
+            },
+            {
+              path:'empInfoAdd',
+              name: 'empInfoAdd',
+              component: empInfoAdd
             },
             {
               path:'empInfoMod',

@@ -22,3 +22,8 @@ export default {
   },
 }
 </script>
+<style>
+  .comp-full-calendar {
+    max-width: 90%;
+  }
+</style>

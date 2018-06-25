@@ -85,6 +85,7 @@ export default {
                             console.log(that.form);
                             Cookies.set('username', that.form.userName);
                             Cookies.set('password', that.form.password);
+                            Cookies.set('JSESSIONID', '9E59AEEA94D6C6869B765DECD28E4186');
                             that.$router.push('/')
                         }
                     })

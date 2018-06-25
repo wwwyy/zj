@@ -3,27 +3,14 @@
   <div id="personMagt">
     <Layout>
                 <Sider hide-trigger :style="{background: '#fff'}">
-                    <Menu active-name="depPlanning" theme="light" width="auto" :open-names="['1']" @on-select="go">
+                    <Menu active-name="empInfoMagt" theme="light" width="auto" :open-names="['1']" @on-select="go">
                         <Submenu name="1">
                             <template slot="title">
                                 <Icon type="ios-navigate"></Icon>
-                               部门管理
+                               员工管理
                             </template>
-                            <MenuItem name="depPlanning">部门规划</MenuItem>
-                        </Submenu>
-                        <Submenu name="2">
-                            <template slot="title">
-                                <Icon type="ios-keypad"></Icon>
-                                岗位管理
-                            </template>
-                            <MenuItem name="postPlanning">岗位规划</MenuItem>
-                        </Submenu>
-                        <Submenu name="3">
-                            <template slot="title">
-                                <Icon type="ios-analytics"></Icon>
-                                组织结构
-                            </template>
-                            <MenuItem name="organizationChart">组织结构图</MenuItem>
+                            <MenuItem name="empInfoMagt">员工信息管理</MenuItem>
+                            <MenuItem name="empChanges">人事变动</MenuItem>
                         </Submenu>
                     </Menu>
                 </Sider>
@@ -46,8 +33,7 @@ export default {
   },
   methods: {
       go(name){
-          this.$router.push('/orgPlanning/'+name)
-          console.log(name)
+          this.$router.push(name)
       }
       
   },

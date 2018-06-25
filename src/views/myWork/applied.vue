@@ -27,7 +27,7 @@
             </Row>
         </FormItem>
           <FormItem class="btns">
-            <Button type="primary">查　　询</Button>
+            <Button type="primary" @click="test">查　　询</Button>
             <Button type="ghost" style="margin-left: 8px">清　　空</Button>
         </FormItem>
     </Form>
@@ -39,6 +39,8 @@
 </template>
 
 <script>
+import axios from 'axios';
+import qs from 'qs';
 
 let testData = {
     'histories' : [
@@ -342,6 +344,19 @@ export default {
             }
         },
         methods:{
+            test(){
+                axios.post('/api/hotelhr/organize/structure/position/0.json', qs.stringify(
+                    {
+                    id: "0"
+                    }
+                ))
+                    .then(function (response) {
+                        console.log(response);
+                    })
+                    .catch(function (error) {
+                        console.log(error);
+                    });
+            },
             // 获取历史记录信息
             handleListApproveHistory(){
                 
