@@ -16,8 +16,8 @@ Vue.use(iView);
 
 // axios.defaults.baseURL = apiConfig.baseUrl
 Vue.config.productionTip = false
-
-
+axios.defaults.withCredentials=true;
+Vue.prototype.$axios = axios;
 /* eslint-disable no-new */
 new Vue({
   el: '#app',

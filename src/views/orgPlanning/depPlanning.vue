@@ -96,7 +96,7 @@ export default {
   },
   beforeCreate( ) {
     const that = this;
-    axios.post('http://localhost/hotelhr/organize/department.json', qs.stringify({id:'0'}))
+    axios.post('/api/hotelhr/organize/department.json', qs.stringify({id:''}))
             .then(function (response) {
                 let Result = response.data.result;
                 let treeData = [];
@@ -139,8 +139,9 @@ export default {
       console.log(item)
     },
     loadData (item, callback) {
+      console.log(item,callback)
         const that = this;
-        axios.post('http://localhost/hotelhr/organize/department.json', qs.stringify({id:item.id}))
+        axios.post('/api/hotelhr/organize/department.json', qs.stringify({id:item.nodeKey}))
             .then(function (response) {
                 let Result = response.data.result;
                 let treeData = [];

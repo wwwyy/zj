@@ -28,7 +28,7 @@
         </FormItem>
           <FormItem class="btns">
             <Button type="primary" @click="test">查　　询</Button>
-            <Button type="ghost" style="margin-left: 8px">清　　空</Button>
+            <Button type="ghost" style="margin-left: 8px" @click="test2">清　　空</Button>
         </FormItem>
     </Form>
     
@@ -41,7 +41,7 @@
 <script>
 import axios from 'axios';
 import qs from 'qs';
-
+axios.defaults.withCredentials=true;
 let testData = {
     'histories' : [
                     {
@@ -345,7 +345,20 @@ export default {
         },
         methods:{
             test(){
-                axios.post('/api/hotelhr/organize/structure/position/0.json', qs.stringify(
+                axios.post('/api/hotelhr/organize/department.json', qs.stringify(
+                    {
+                    id: "0"
+                    }
+                ))
+                    .then(function (response) {
+                        console.log(response);
+                    })
+                    .catch(function (error) {
+                        console.log(error);
+                    });
+            },
+            test2(){
+                axios.post('/api/hotelhr/personnel/action/0/show.json', qs.stringify(
                     {
                     id: "0"
                     }

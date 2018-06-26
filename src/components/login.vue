@@ -40,7 +40,11 @@
 import Cookies from 'js-cookie';
 import axios from 'axios';
 import qs from 'qs';
+// axios.defaults.withCredentials=true;
+
 axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded'
+//axios.defaults.headers.post['Cookies'] = 'JSESSIONID=8C1F456F7FA6372A8029ABD282346957'
+
 // axios.interceptors.request.use((config) => {
 //   config.headers['X-Requested-With'] = 'XMLHttpRequest'
 
@@ -66,26 +70,26 @@ export default {
     },
     methods: {
         handleSubmit () {
-            Cookies.set('username', this.form.userName);
-            Cookies.set('password', this.form.password);
-            this.$router.push('/')
+            // Cookies.set('username', this.form.userName);
+            // Cookies.set('password', this.form.password);
+            // this.$router.push('/')
             
-            // const that = this;
-  
-            // axios.post('/api/hotelhr/login.json', qs.stringify({username:'admin',password:'admin'}))
-            //         .then(function (response) {
-            //             console.log(response.data.success);
-            //             if(response.data.success) {
-            //                 console.log(that.form);
-            //                 Cookies.set('username', that.form.userName);
-            //                 Cookies.set('password', that.form.password);
-            //                 Cookies.set('JSESSIONID', '9E59AEEA94D6C6869B765DECD28E4186');
-            //                 that.$router.push('/')
-            //             }
-            //         })
-            //         .catch(function (error) {
-            //             console.log(error);
-            //         });
+            const that = this;
+            Cookies.set('JSESSIONID', '085D5B1F9A5E3E6F0E270B013D47E6F5');
+            axios.post('/api/hotelhr/login.json', qs.stringify({username:'admin',password:'admin'}))
+                    .then(function (response) {
+                        console.log(response);
+                        if(response.data.success) {
+                            console.log(that.form);
+                            Cookies.set('username', that.form.userName);
+                            Cookies.set('password', that.form.password);
+                            
+                            that.$router.push('/')
+                        }
+                    })
+                    .catch(function (error) {
+                        console.log(error);
+                    });
 
 
             // this.$refs.loginForm.validate((valid) => {
