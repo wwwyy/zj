@@ -73,9 +73,8 @@ export default {
             // Cookies.set('username', this.form.userName);
             // Cookies.set('password', this.form.password);
             // this.$router.push('/')
-            
             const that = this;
-            Cookies.set('JSESSIONID', '085D5B1F9A5E3E6F0E270B013D47E6F5');
+            Cookies.set('JSESSIONID', '655170834DE1DA59280ED75D693E32FF');
             axios.post('/api/hotelhr/login.json', qs.stringify({username:'admin',password:'admin'}))
                     .then(function (response) {
                         console.log(response);

@@ -2,24 +2,24 @@
    <div id="empInfoMagt">
     <Form :model="formItem" :label-width="84" inline style="text-align:left;">
         <FormItem label="工号">
-            <Input v-model="formItem.input" placeholder="请输入工号" style="width:90px"></Input>
+            <Input v-model="formItem.no" placeholder="请输入工号" style="width:90px"></Input>
         </FormItem>
         <FormItem label="姓名">
-            <Input v-model="formItem.input" placeholder="请输入姓名" style="width:90px"></Input>
+            <Input v-model="formItem.name" placeholder="请输入姓名" style="width:90px"></Input>
         </FormItem>
         <FormItem label="入职时间">
             <Row style="width:240px">
                 <Col span="11">
-                    <DatePicker type="date" placeholder="请选择日期" v-model="formItem.date" ></DatePicker>
+                    <DatePicker type="date" placeholder="请选择日期" v-model="formItem.inductionDateBegin" ></DatePicker>
                 </Col>
                 <Col span="2" style="text-align: center">至</Col>
                 <Col span="11">
-                    <TimePicker type="date" placeholder="请选择日期" v-model="formItem.date"></TimePicker>
+                    <TimePicker type="date" placeholder="请选择日期" v-model="formItem.inductionDateEnd"></TimePicker>
                 </Col>
             </Row>
         </FormItem>
          <FormItem label="学历">
-            <Select v-model="formItem.select1" style="width:90px">
+            <Select v-model="formItem.education" style="width:90px">
                 <Option value="beijing">全部</Option>
                 <Option value="shanghai">博士</Option>
                 <Option value="shenzhen">硕士</Option>
@@ -30,24 +30,24 @@
         <FormItem label="店龄">
             <Row> 
                 <Col span="11">
-                    <InputNumber :max="10" :min="1" v-model="value1" style="50px"></InputNumber>
+                    <InputNumber :max="10" :min="1" v-model="storeAgeBegin" style="50px"></InputNumber>
                 </Col>
                 <Col span="2" style="text-align: center">至</Col>
                 <Col span="11">
-                    <InputNumber :max="10" :min="1" v-model="value1"></InputNumber>
+                    <InputNumber :max="10" :min="1" v-model="storeAgeEnd"></InputNumber>
                 </Col>
             </Row>
         </FormItem>
      <br>
         <FormItem label="部门">
-            <Select v-model="formItem.select1" style="width:90px">
+            <Select v-model="formItem.departmentId" style="width:90px">
                 <Option value="beijing">New York</Option>
                 <Option value="shanghai">London</Option>
                 <Option value="shenzhen">Sydney</Option>
             </Select>
         </FormItem>
         <FormItem label="职级" >
-            <Select v-model="formItem.select2" style="width:90px">
+            <Select v-model="formItem.grade" style="width:90px">
                 <Option value="beijing">全部</Option>
                 <Option value="shanghai">实习生</Option>
                 <Option value="shenzhen">正式员工</Option>
@@ -58,11 +58,11 @@
          <FormItem label="合同到期时间">
             <Row style="width:240px">
                 <Col span="11">
-                    <DatePicker type="date" placeholder="请选择日期" v-model="formItem.date"></DatePicker>
+                    <DatePicker type="date" placeholder="请选择日期" v-model="formItem.contractEndDateBegin"></DatePicker>
                 </Col>
                 <Col span="2" style="text-align: center">至</Col>
                 <Col span="11">
-                    <TimePicker type="date" placeholder="请选择日期" v-model="formItem.date"></TimePicker>
+                    <TimePicker type="date" placeholder="请选择日期" v-model="formItem.contractEndDateEnd"></TimePicker>
                 </Col>
             </Row>
         </FormItem>
