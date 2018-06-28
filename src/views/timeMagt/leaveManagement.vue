@@ -1,60 +1,96 @@
 <template>
   <div id="leaveManagement">
-    <Form :model="formItem" :label-width="80" inline style="text-align:left;">
-        <FormItem label="请假事由">
-            <Input v-model="formItem.input" placeholder="请输入工号" style="width:100px;"></Input>
+    <Form :model="formValidate" ref="formValidate" :label-width="80" inline style="text-align:left;min-width:1250px;overflow:hidden;">
+        <FormItem label="工号" prop="id">
+            <Input v-model="formValidate.id" placeholder="请输入工号" style="width:100px;"></Input>
         </FormItem>
-        <FormItem label="请假事由">
-            <Input v-model="formItem.input" placeholder="请输入姓名" style="width:100px"></Input>
+       <FormItem label="部门" prop="departmentId">
+            <Select v-model="formValidate.departmentId" style="width:130px">
+               <Option value="1">集团总部</Option>
+    
+                    <Option value="2"> &nbsp;&nbsp; ┝ 信息中心</Option>
+    
+                    <Option value="3">　&nbsp;&nbsp;&nbsp;&nbsp;　┝ 开发组</Option>
+    
+                    <Option value="4">　&nbsp;&nbsp;&nbsp;&nbsp;　┝ 测试组</Option>
+    
+                    <Option value="5">　&nbsp;&nbsp;&nbsp;&nbsp;　┝ 运维组</Option>
+    
+                    <Option value="6"> &nbsp;&nbsp; ┝ 财务中心</Option>
+    
+                    <Option value="7"> &nbsp;&nbsp; ┝ 人事中心</Option>
+    
+                    <Option value="8"> &nbsp;&nbsp; ┝ 客服中心</Option>
+    
+                    <Option value="9"> &nbsp;&nbsp; ┝ 采购中心</Option>
+            </Select>
         </FormItem>
-        <FormItem label="请假事由">
-            <Select v-model="formItem.select1" style="width:100px">
-                <Option value="beijing">New York</Option>
-                <Option value="shanghai">London</Option>
-                <Option value="shenzhen">Sydney</Option>
+        <FormItem label="请假事由" prop="type">
+            <Select v-model="formValidate.type" style="width:130px">
+                
+    
             </Select>
         </FormItem>
        <FormItem label="提交时间">
-            <Row style="width:240px;">
-                <Col span="11">
-                    <DatePicker type="date" placeholder="请选择日期" v-model="formItem.submitDate1"></DatePicker>
+            <Row style="width:320px;">
+               <Col span="11">
+                 <FormItem prop="submitBeginDate">
+                    <DatePicker type="datetime" placeholder="请选择日期" format="yyyy-MM-dd HH:mm" v-model="formValidate.submitBeginDate"   @on-change="dateMod1"></DatePicker>
+                </FormItem>
                 </Col>
                 <Col span="2" style="text-align: center">-</Col>
                 <Col span="11">
-                    <DatePicker type="date" placeholder="请选择日期" v-model="formItem.submitDate2"></DatePicker>
+                 <FormItem prop="submitEndDate">
+                    <DatePicker type="datetime" placeholder="请选择日期" format="yyyy-MM-dd HH:mm" v-model="formValidate.submitEndDate" @on-change="dateMod2"></DatePicker>
+                </FormItem>
                 </Col>
             </Row>
         </FormItem>
         <br>
-        <FormItem label="请假事由">
-            <Select v-model="formItem.select1" style="width:100px">
-                <Option value="beijing">New York</Option>
-                <Option value="shanghai">London</Option>
-                <Option value="shenzhen">Sydney</Option>
+        <FormItem label="姓名" prop="name">
+            <Input v-model="formValidate.name" placeholder="请输入姓名" style="width:100px"></Input>
+        </FormItem>
+        
+        <FormItem label="职级" prop="grade">
+            <Select v-model="formValidate.grade" style="width:130px">
+                <Option value="1">JB1</Option>
+    
+                    <Option value="2">JB2</Option>
+    
+                    <Option value="3">JB3</Option>
+    
+                    <Option value="4">JB4</Option>
+    
+                    <Option value="5">JB5</Option>
+    
+                    <Option value="6">JB6</Option>
+    
+                    <Option value="7">JB7</Option>
+    
+                    <Option value="8">JB8</Option>
             </Select>
         </FormItem>
-        <FormItem label="请假事由">
-            <Select v-model="formItem.select1" style="width:100px">
-                <Option value="beijing">New York</Option>
-                <Option value="shanghai">London</Option>
-                <Option value="shenzhen">Sydney</Option>
-            </Select>
-        </FormItem>
-        <FormItem label="申请状态" >
-            <Select v-model="formItem.select2" style="width:100px">
-                <Option value="beijing">New York</Option>
-                <Option value="shanghai">London</Option>
-                <Option value="shenzhen">Sydney</Option>
+         <FormItem label="申请状态" prop="state">
+            <Select v-model="formValidate.state" style="width:130px">
+                <Option value="1">全部</Option>
+                <Option value="2">审批通过</Option>
+                <Option value="3">审批中</Option>
+                <Option value="4">审批驳回</Option>
+                <Option value="5">已撤销</Option>
             </Select>
         </FormItem>
         <FormItem label="请假时间">
-            <Row style="width:240px;">
+            <Row style="width:320px;">
                 <Col span="11">
-                    <DatePicker type="date" placeholder="请选择日期" v-model="formItem.leaveDate1"></DatePicker>
+                <FormItem prop="leaveBeginDate">
+                    <DatePicker type="datetime" placeholder="请选择日期" format="yyyy-MM-dd HH:mm" v-model="formValidate.leaveBeginDate" @on-change="dateMod3"></DatePicker>
+                    </FormItem>
                 </Col>
                 <Col span="2" style="text-align: center">-</Col>
                 <Col span="11">
-                    <DatePicker type="date" placeholder="请选择日期" v-model="formItem.leaveDate2"></DatePicker>
+                <FormItem prop="leaveEndDate">
+                    <DatePicker type="datetime" placeholder="请选择日期" format="yyyy-MM-dd HH:mm" v-model="formValidate.leaveEndDate" @on-change="dateMod4"></DatePicker>
+                    </FormItem>
                 </Col>
             </Row>
         </FormItem>
@@ -62,8 +98,8 @@
         
         
         <FormItem class="btns">
-            <Button type="primary">查　　询</Button>
-            <Button type="ghost" style="margin-left: 8px">清　　空</Button>
+            <Button type="primary" @click="search">查　　询</Button>
+            <Button type="ghost" style="margin-left: 8px" @click="handleReset('formValidate')">清　　空</Button>
         </FormItem>
     </Form>
     <div style="text-align:left;padding:5px 0;border-top:1px solid #ccc">
@@ -75,232 +111,9 @@
 </template>
 
 <script>
-let testData = {
-    'histories' : [
-                    {
-                        id: '01311',
-                        name: '赵彦明',
-                        reasons: '年假',
-                        department: '销售部',
-                        englishName: 'John Brown',
-                        department: '销售部',
-                        quarter: '销售主管',
-                        level: 'JB6',
-                        state: '审批通过',
-                        leaveTime: '2018-10-03 - 2018-10-08',
-                        duration: '5天',
-                        submitTime: '2018-10-03 20:00:00'
-                    },
-                    {
-                        id: '01312',
-                        name: '赵彦明',
-                        reasons: '年假',
-                        department: '销售部',
-                        englishName: 'John Brown',
-                        department: '销售部',
-                        quarter: '销售主管',
-                        level: 'JB6',
-                        state: '审批通过',
-                        leaveTime: '2018-10-03 - 2018-10-08',
-                        duration: '5天',
-                        submitTime: '2018-10-03 20:00:00'
-                    },
-                    {
-                        id: '01313',
-                        name: '赵彦明',
-                        reasons: '年假',
-                        department: '销售部',
-                        englishName: 'John Brown',
-                        department: '销售部',
-                        quarter: '销售主管',
-                        level: 'JB6',
-                        state: '审批通过',
-                        leaveTime: '2018-10-03 - 2018-10-08',
-                        duration: '5天',
-                        submitTime: '2018-10-03 20:00:00'
-                    },
-                    {
-                        id: '01314',
-                        name: '赵彦明',
-                        englishName: 'John Brown',
-                        department: '销售部',
-                        quarter: '销售主管',
-                        level: 'JB6',
-                        punchTime: '2018-10-03 20:00:00'
-                    },
-                    {
-                        id: '01315',
-                        name: '赵彦明',
-                        englishName: 'John Brown',
-                        department: '销售部',
-                        quarter: '销售主管',
-                        level: 'JB6',
-                        punchTime: '2018-10-03 20:00:00'
-                    },
-                    {
-                        id: '01316',
-                        name: '赵彦明',
-                        englishName: 'John Brown',
-                        department: '销售部',
-                        quarter: '销售主管',
-                        level: 'JB6',
-                        punchTime: '2018-10-03 20:00:00'
-                    },
-                    {
-                        id: '01317',
-                        name: '赵彦明',
-                        englishName: 'John Brown',
-                        department: '销售部',
-                        quarter: '销售主管',
-                        level: 'JB6',
-                        punchTime: '2018-10-03 20:00:00'
-                    },
-                    {
-                        id: '01318',
-                        name: '赵彦明',
-                        englishName: 'John Brown',
-                        department: '销售部',
-                        quarter: '销售主管',
-                        level: 'JB6',
-                        punchTime: '2018-10-03 20:00:00'
-                    },
-                    {
-                        id: '01319',
-                        name: '赵彦明',
-                        englishName: 'John Brown',
-                        department: '销售部',
-                        quarter: '销售主管',
-                        level: 'JB6',
-                        punchTime: '2018-10-03 20:00:00'
-                    },
-                    {
-                        id: '01320',
-                        name: '赵彦明',
-                        englishName: 'John Brown',
-                        department: '销售部',
-                        quarter: '销售主管',
-                        level: 'JB6',
-                        punchTime: '2018-10-03 20:00:00'
-                    },
-                    {
-                        id: '01321',
-                        name: '赵彦明',
-                        englishName: 'John Brown',
-                        department: '销售部',
-                        quarter: '销售主管',
-                        level: 'JB6',
-                        punchTime: '2018-10-03 20:00:00'
-                    },
-                    {
-                        id: '01322',
-                        name: '赵彦明',
-                        englishName: 'John Brown',
-                        department: '销售部',
-                        quarter: '销售主管',
-                        level: 'JB6',
-                        punchTime: '2018-10-03 20:00:00'
-                    },
-                    {
-                        id: '01323',
-                        name: '赵彦明',
-                        englishName: 'John Brown',
-                        department: '销售部',
-                        quarter: '销售主管',
-                        level: 'JB6',
-                        punchTime: '2018-10-03 20:00:00'
-                    },
-                    {
-                        id: '01324',
-                        name: '赵彦明',
-                        englishName: 'John Brown',
-                        department: '销售部',
-                        quarter: '销售主管',
-                        level: 'JB6',
-                        punchTime: '2018-10-03 20:00:00'
-                    },
-                    {
-                        id: '01325',
-                        name: '赵彦明',
-                        englishName: 'John Brown',
-                        department: '销售部',
-                        quarter: '销售主管',
-                        level: 'JB6',
-                        punchTime: '2018-10-03 20:00:00'
-                    },
-                    {
-                        id: '01326',
-                        name: '赵彦明',
-                        englishName: 'John Brown',
-                        department: '销售部',
-                        quarter: '销售主管',
-                        level: 'JB6',
-                        punchTime: '2018-10-03 20:00:00'
-                    },
-                    {
-                        id: '01327',
-                        name: '赵彦明',
-                        englishName: 'John Brown',
-                        department: '销售部',
-                        quarter: '销售主管',
-                        level: 'JB6',
-                        punchTime: '2018-10-03 20:00:00'
-                    },
-                    {
-                        id: '01328',
-                        name: '赵彦明',
-                        englishName: 'John Brown',
-                        department: '销售部',
-                        quarter: '销售主管',
-                        level: 'JB6',
-                        punchTime: '2018-10-03 20:00:00'
-                    },
-                    {
-                        id: '01329',
-                        name: '赵彦明',
-                        englishName: 'John Brown',
-                        department: '销售部',
-                        quarter: '销售主管',
-                        level: 'JB6',
-                        punchTime: '2018-10-03 20:00:00'
-                    },
-                    {
-                        id: '01330',
-                        name: '赵彦明',
-                        englishName: 'John Brown',
-                        department: '销售部',
-                        quarter: '销售主管',
-                        level: 'JB6',
-                        punchTime: '2018-10-03 20:00:00'
-                    },
-                    {
-                        id: '01331',
-                        name: '赵彦明',
-                        englishName: 'John Brown',
-                        department: '销售部',
-                        quarter: '销售主管',
-                        level: 'JB6',
-                        punchTime: '2018-10-03 20:00:00'
-                    },
-                    {
-                        id: '01332',
-                        name: '赵彦明',
-                        englishName: 'John Brown',
-                        department: '销售部',
-                        quarter: '销售主管',
-                        level: 'JB6',
-                        punchTime: '2018-10-03 20:00:00'
-                    },
-                    {
-                        id: '01333',
-                        name: '赵彦明',
-                        englishName: 'John Brown',
-                        department: '销售部',
-                        quarter: '销售主管',
-                        level: 'JB6',
-                        punchTime: '2018-10-03 20:00:00'
-                    },
-                ]
-}
+import axios from 'axios';
+import qs from 'qs';
+import Cookies from 'js-cookie';
 export default {
     data () {
             return {
@@ -308,20 +121,17 @@ export default {
                 historyData: [],
                 dataCount:0,
                 pageSize:10,
-                formItem: {
-                    input: '',
-                    select1: '',
-                    select2: '',
-                    radio: 'male',
-                    checkbox: [],
-                    switch: true,
-                    submitDate1: '',
-                    submitDate2: '',
-                    leaveDate1: '',
-                    leaveDate2: '',
-                    time: '',
-                    slider: [20, 50],
-                    textarea: ''
+                formValidate: {
+                    id: '',
+                    departmentId:'',
+                    name: '',
+                    grade:'',
+                    type: '',
+                    state: '',
+                    submitBeginDate: '',
+                    submitEndDate: '',
+                    leaveBeginDate: '',
+                    leaveEndDate: '',
                 },
                 historyColumns: [
                     {
@@ -330,40 +140,45 @@ export default {
                     },
                     {
                         title: '姓名',
-                        key: 'name'
+                        key: 'name',
+                        minWidth: 100
                     },
                     {
                         title: '请假事由',
-                        key: 'reasons'
+                        key: 'type',
+                        minWidth: 100
                     },
                     {
                         title: '部门',
-                        key: 'department'
+                        key: 'departmentName',
+                        minWidth: 100
                     },
                     {
                         title: '职级',
-                        key: 'level'
+                        key: 'grade',
+                        minWidth: 100
                     },
                     {
                         title: '申请状态',
-                        key: 'state'
+                        key: 'state',
+                        minWidth: 100
                     },
                     {
                         title: '请假时段',
-                        key: 'leaveTime',
-                        width: 180,
+                        key: 'dateTime',
+                        minWidth: 300
                     },
                     {
                         title: '时长',
-                        key: 'duration',
+                        key: 'duration'
                     },
                     {
                         title: '提交时间',
-                        key: 'submitTime',
-                        width: 150,
+                        key: 'gmtCreate',
+                        width: 150
                     },
                     {
-                        title: 'Action',
+                        title: '操作',
                         key: 'action',
                         width: 150,
                         align: 'center',
@@ -379,7 +194,7 @@ export default {
                                     },
                                     on: {
                                         click: () => {
-                                            this.show(params.index)
+                                            this.check(params.index)
                                         }
                                     }
                                 }, '查看'),
@@ -390,7 +205,7 @@ export default {
                                     },
                                     on: {
                                         click: () => {
-                                            this.show(params.index)
+                                            // this.show(params.index)
                                         }
                                     }
                                 }, '撤销')
@@ -401,41 +216,86 @@ export default {
             }
         },
         methods:{
-            // 获取历史记录信息
-            handleListApproveHistory(){
+           search(){
+                const that = this;
+                console.log(that.formValidate.submitBeginDate)
+                axios.post('/api/hotelhr/time/leave/manage/search.json', {
+                "pager": {
+                    "currentPage": 1,
+                    "pageSize": 10
+                },
+                "params": {
+                  
+                    "dateBegin": that.formValidate.leaveBeginDate,
+                    "dateEnd": that.formValidate.leaveEndDate,
+                   
+                    "state": that.formValidate.state,
+                    "type": that.formValidate.type
+                },
+                "submitBeginDate":that.formValidate.submitBeginDate,
+                "submitBeginDate":that.formValidate.submitEndDate
+            }).then(function (response) {
+                const data = response.data.result;
+                data.records.forEach(element => {
+                    element.dateTime = element.dateBegin +'----'+ element.dateEnd
+                });
+                that.historyData = data.records;
+                that.currentPage = data.currentPage;
+                that.dataCount = data.totalRecords;
                 
-                // 保存取到的所有数据
-                this.ajaxHistoryData = testData.histories
-                this.dataCount = testData.histories.length;
-                // 初始化显示，小于每页显示条数，全显，大于每页显示条数，取前每页条数显示
-                if(testData.histories.length < this.pageSize){
-                    this.historyData = this.ajaxHistoryData;
-                }else{
-                    this.historyData = this.ajaxHistoryData.slice(0,this.pageSize);
-                }
-                    
-               
+              })
             },
             changepage(index){
-                var _start = ( index - 1 ) * this.pageSize;
-                var _end = index * this.pageSize;
-                this.historyData = this.ajaxHistoryData.slice(_start,_end);
+                // var _start = ( index - 1 ) * this.pageSize;
+                // var _end = index * this.pageSize;
+                // this.historyData = this.ajaxHistoryData.slice(_start,_end);
             },
             toApplyForm(){
                  this.$router.push('/timeMagt/applyLeaveForm')
             },
-            show (index) {
-               console.log(index)
-               this.$router.push('/timeMagt/applyLeaveDetail')
+             dateMod1(date1){
+                this.formValidate.submitBeginDate = date1;
             },
-            //删除当前行
+            dateMod2(date2){
+                this.formValidate.submitEndDate = date2;
+            },
+            dateMod3(date3){
+                this.formValidate.leaveBeginDate = date3;
+            },
+            dateMod4(date4){
+                this.formValidate.leaveEndDate = date4;
+            },
+            handleReset (name) {
+                console.dir(name)
+                this.$refs[name].resetFields();
+            },
+            check(index){
+                Cookies.set('leaveId', index);
+                this.$router.push('applyLeaveDetail')
+            },
             remove (index) {
                 this.data6.splice(index, 1);
             }
         },
         created(){
-             this.handleListApproveHistory();
-        }
+            const that = this;
+            axios.post('/api/hotelhr/time/leave/manage/search.json', {
+                "pager": {
+                    "currentPage": 1,
+                    "pageSize": 10
+                }
+            }).then(function (response) {
+                console.log(response)
+                const data = response.data.result;
+                data.records.forEach(element => {
+                    element.dateTime = element.dateBegin +'----'+ element.dateEnd
+                });
+                that.historyData = data.records;
+                that.currentPage = data.currentPage;
+                that.dataCount = data.totalRecords;
+                
+              })
+        },
 }
 </script>
 

@@ -348,7 +348,7 @@
     
                 axios.post('/api/hotelhr/organize/department.json', qs.stringify({
     
-                        id: item.nodeKey
+                        id: item.id
     
                     }))
     

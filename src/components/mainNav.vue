@@ -42,7 +42,7 @@
                 </Col>
         <Col span="3">
             <span class="userName">张明明</span>
-            <Button size="small" shape="circle">退出登录</Button>
+            <Button size="small" shape="circle" @click="logout">退出登录</Button>
         </Col>
     </Row>
                 
@@ -55,13 +55,18 @@
 </template>
 
 <script>
-
+import Cookies from 'js-cookie';
 export default {
     name: 'mainNav',
     methods: {
         go(name){
             this.$router.push('/'+name)
             console.log(name)
+        },
+        logout(){
+            Cookies.remove('password');
+            Cookies.remove('username');
+            this.$router.push('/')
         }
         
     }

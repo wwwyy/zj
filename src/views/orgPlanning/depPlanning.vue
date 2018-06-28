@@ -165,7 +165,7 @@ export default {
     },
     loadData (item, callback) {
         const that = this;
-        axios.post('/api/hotelhr/organize/department.json', qs.stringify({id:item.nodeKey}))
+        axios.post('/api/hotelhr/organize/department.json', qs.stringify({id:item.id}))
             .then(function (response) {
                 let Result = response.data.result;
                 let treeData = [];
